@@ -74,6 +74,16 @@ class FastestInsertApplicationTests {
         assertInsertedCount(param);
     }
 
+    /** Part 1: JPA saveAll (SELECT per entity + INSERT) */
+    @ParameterizedTest
+    @MethodSource(TEST_PARAMS)
+    void saveAllInsert(TestParam param) {
+        if (param.getObjectsPerInsert() > 1) return;
+        multipleRunner.execJob("saveAll", param,
+                v -> fastInsertService.saveAll(param.getPeople()));
+        assertInsertedCount(param);
+    }
+
     private void assertInsertedCount(TestParam param) {
         long count = personRepository.count();
         Assertions.assertThat(count).isEqualTo(param.getPeople().size());
