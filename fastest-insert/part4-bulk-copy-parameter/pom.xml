@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>dev.professional.blog</groupId>
+        <artifactId>fastest-insert</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>fastest-insert-part4-bulk-copy-parameter</artifactId>
+    <name>Part 4 — useBulkCopyForBatchInsert</name>
+    <description>JDBC driver useBulkCopyForBatchInsert parameter (blog post: Part 4). Configuration-only change.</description>
+
+    <dependencies>
+        <dependency>
+            <groupId>dev.professional.blog</groupId>
+            <artifactId>fastest-insert-common</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>dev.professional.blog</groupId>
+            <artifactId>fastest-insert-part1-hibernate-batching</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>dev.professional.blog</groupId>
+            <artifactId>fastest-insert-part2-jdbc-strategies</artifactId>
+        </dependency>
+    </dependencies>
+</project>
