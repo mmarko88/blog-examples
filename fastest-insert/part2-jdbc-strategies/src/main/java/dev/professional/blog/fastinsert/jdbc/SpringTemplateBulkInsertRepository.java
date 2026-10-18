@@ -39,8 +39,9 @@ public class SpringTemplateBulkInsertRepository {
         } else {
             List<List<Person>> equalSizePartitions = partitions.subList(0, partitions.size() - 1);
             persist(tableDescriptor, batchSize, objectsPerInsert, equalSizePartitions);
-            List<List<Person>> lastPartition = Collections.singletonList(partitions.get(partitions.size() - 1));
-            persist(tableDescriptor, 1, lastPartition.size(), lastPartition);
+            List<Person> lastChunk = partitions.get(partitions.size() - 1);
+            List<List<Person>> lastPartition = Collections.singletonList(lastChunk);
+            persist(tableDescriptor, 1, lastChunk.size(), lastPartition);
         }
     }
 
