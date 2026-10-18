@@ -36,30 +36,37 @@ fastest-insert/
 | Rank | Strategy | Avg ms | Module |
 |------|----------|--------|--------|
 | 1 | Parallel Bulk API (4 threads) | 330 | part6 |
-| 2 | Parallel Bulk API (8 threads) | 434 | part6 |
-| 3 | Bulk API (single thread) | 492 | part2 |
-| 4 | Parallel JdbcTemplate (16 threads) | 608 | part6 |
-| 5 | TVP (Table-Valued Parameters) | 818 | part8 |
-| 6 | StatelessSession + bulkCopy=true | 1075 | part5 |
-| 7 | JdbcTemplate + bulkCopy=true | 1373 | part4 |
-| 8 | Plain JDBC + bulkCopy=true | 1516 | part8 |
-| 9 | Hibernate + bulkCopy=true | 2144 | part4 |
-| 10 | JDBC PreparedStatement | 2423 | part2 |
-| 11 | StatelessSession | 2650 | part5 |
-| 12 | JdbcTemplate | 2985 | part2 |
-| 13 | saveAll + Persistable | 3426 | part5 |
-| 14 | Hibernate persist (chunked) | 4048 | part1 |
-| 15 | Plain JDBC (no Hibernate) | 3905 | part8 |
-| 16 | saveAll (original) | 27794 | part1 |
+| 2 | Multi-value 400 + 8 threads | 368 | part3+6 |
+| 3 | Multi-value 400 + 4 threads | 426 | part3+6 |
+| 4 | Parallel Bulk API (8 threads) | 434 | part6 |
+| 5 | Bulk API (single thread) | 492 | part2 |
+| 6 | Parallel JdbcTemplate 16t | 608 | part6 |
+| 7 | Parallel JdbcTemplate 4t + bulkCopy | 731 | part6+4 |
+| 8 | TVP (Table-Valued Parameters) | 818 | part8 |
+| 9 | Multi-value 400 (single thread) | 1058 | part3 |
+| 10 | StatelessSession + bulkCopy=true | 1075 | part5+4 |
+| 11 | JdbcTemplate + bulkCopy=true | 1373 | part4 |
+| 12 | Plain JDBC + bulkCopy=true | 1516 | part8+4 |
+| 13 | Hibernate + bulkCopy=true | 2144 | part4 |
+| 14 | JDBC PreparedStatement | 2423 | part2 |
+| 15 | StatelessSession | 2650 | part5 |
+| 16 | JdbcTemplate | 2985 | part2 |
+| 17 | saveAll + Persistable | 3426 | part5 |
+| 18 | Plain JDBC (no Hibernate) | 3905 | part8 |
+| 19 | Hibernate persist (chunked) | 4048 | part1 |
+| 20 | saveAll (original) | 27794 | part1 |
 
 ### Key findings
 
-- **`useBulkCopyForBatchInsert=true`** gives 2-2.5x speedup to ALL batch strategies (one connection string param!)
 - **Parallel Bulk API** is the absolute fastest (330ms for 100k rows)
+- **Multi-value 400 + parallel** is a close second (368ms) and works with any JDBC driver
+- **`useBulkCopyForBatchInsert=true`** gives 2-2.5x speedup to single-row batch strategies
+- **Multi-value INSERT is incompatible with useBulkCopyForBatchInsert** -- choose one or the other
 - **Persistable interface** makes saveAll 8x faster by eliminating SELECT-before-INSERT
 - **StatelessSession** is 35% faster than regular Hibernate persist
-- **TVP** is 3rd fastest single-thread strategy (818ms)
+- **TVP** is the best portable single-thread strategy (818ms)
 - **Indexes** slow inserts 2-7x depending on strategy (Bulk API most sensitive)
+- **Batch size sweet spot is 500-1000** -- below 200 overhead dominates, above 1000 diminishing returns
 
 ## Prerequisites
 
