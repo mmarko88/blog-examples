@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="700" height="400" font-family="Segoe UI, Arial, sans-serif">
+<rect width="700" height="400" fill="white"/>
+<text x="350" y="30" text-anchor="middle" font-size="16" font-weight="bold">Thread Count vs Insert Time (100k, batch=1000)</text>
+<line x1="80" y1="50" x2="80" y2="340" stroke="#ccc"/>
+<line x1="80" y1="340" x2="540" y2="340" stroke="#ccc"/>
+<text x="80" y="360" text-anchor="middle" font-size="11">1</text>
+<text x="195" y="360" text-anchor="middle" font-size="11">2</text>
+<text x="310" y="360" text-anchor="middle" font-size="11">4</text>
+<text x="425" y="360" text-anchor="middle" font-size="11">8</text>
+<text x="540" y="360" text-anchor="middle" font-size="11">16</text>
+<line x1="80" y1="50" x2="540" y2="50" stroke="#eee"/>
+<text x="72" y="54" text-anchor="end" font-size="10" fill="#999">4048</text>
+<line x1="80" y1="122" x2="540" y2="122" stroke="#eee"/>
+<text x="72" y="126" text-anchor="end" font-size="10" fill="#999">3036</text>
+<line x1="80" y1="195" x2="540" y2="195" stroke="#eee"/>
+<text x="72" y="199" text-anchor="end" font-size="10" fill="#999">2024</text>
+<line x1="80" y1="267" x2="540" y2="267" stroke="#eee"/>
+<text x="72" y="271" text-anchor="end" font-size="10" fill="#999">1012</text>
+<line x1="80" y1="340" x2="540" y2="340" stroke="#eee"/>
+<text x="72" y="344" text-anchor="end" font-size="10" fill="#999">0</text>
+<polyline points="80,258 195,269 310,307 425,309 540,309" fill="none" stroke="#2196F3" stroke-width="2.5"/>
+<circle cx="80" cy="258" r="4" fill="#2196F3"/>
+<circle cx="195" cy="269" r="4" fill="#2196F3"/>
+<circle cx="310" cy="307" r="4" fill="#2196F3"/>
+<circle cx="425" cy="309" r="4" fill="#2196F3"/>
+<circle cx="540" cy="309" r="4" fill="#2196F3"/>
+<rect x="555" y="62" width="12" height="12" fill="#2196F3"/>
+<text x="571" y="73" font-size="11">Parallel Bulk API</text>
+<polyline points="80,50 195,105 310,197 425,202 540,297" fill="none" stroke="#9C27B0" stroke-width="2.5"/>
+<circle cx="80" cy="50" r="4" fill="#9C27B0"/>
+<circle cx="195" cy="105" r="4" fill="#9C27B0"/>
+<circle cx="310" cy="197" r="4" fill="#9C27B0"/>
+<circle cx="425" cy="202" r="4" fill="#9C27B0"/>
+<circle cx="540" cy="297" r="4" fill="#9C27B0"/>
+<rect x="555" y="82" width="12" height="12" fill="#9C27B0"/>
+<text x="571" y="93" font-size="11">Parallel JdbcTemplate</text>
+</svg>

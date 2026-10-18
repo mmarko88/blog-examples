@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="700" height="400" font-family="Segoe UI, Arial, sans-serif">
+<rect width="700" height="400" fill="white"/>
+<text x="350" y="30" text-anchor="middle" font-size="16" font-weight="bold">Index Impact on Insert Performance (100k, batch=1000)</text>
+<line x1="80" y1="50" x2="80" y2="340" stroke="#ccc"/>
+<line x1="80" y1="340" x2="540" y2="340" stroke="#ccc"/>
+<text x="80" y="360" text-anchor="middle" font-size="11">0 indexes</text>
+<text x="233" y="360" text-anchor="middle" font-size="11">1 indexes</text>
+<text x="386" y="360" text-anchor="middle" font-size="11">3 indexes</text>
+<text x="540" y="360" text-anchor="middle" font-size="11">5 indexes</text>
+<line x1="80" y1="50" x2="540" y2="50" stroke="#eee"/>
+<text x="72" y="54" text-anchor="end" font-size="10" fill="#999">1</text>
+<line x1="80" y1="122" x2="540" y2="122" stroke="#eee"/>
+<text x="72" y="126" text-anchor="end" font-size="10" fill="#999">0</text>
+<line x1="80" y1="195" x2="540" y2="195" stroke="#eee"/>
+<text x="72" y="199" text-anchor="end" font-size="10" fill="#999">0</text>
+<line x1="80" y1="267" x2="540" y2="267" stroke="#eee"/>
+<text x="72" y="271" text-anchor="end" font-size="10" fill="#999">0</text>
+<line x1="80" y1="340" x2="540" y2="340" stroke="#eee"/>
+<text x="72" y="344" text-anchor="end" font-size="10" fill="#999">0</text>
+<rect x="555" y="62" width="12" height="12" fill="#2196F3"/>
+<text x="571" y="73" font-size="11">Bulk API</text>
+<rect x="555" y="82" width="12" height="12" fill="#9C27B0"/>
+<text x="571" y="93" font-size="11">JdbcTemplate</text>
+<rect x="555" y="102" width="12" height="12" fill="#F44336"/>
+<text x="571" y="113" font-size="11">Hibernate</text>
+</svg>

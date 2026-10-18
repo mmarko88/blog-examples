@@ -1,0 +1,142 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="400" font-family="Segoe UI, Arial, sans-serif">
+<rect width="800" height="400" fill="white"/>
+<text x="400" y="30" text-anchor="middle" font-size="16" font-weight="bold">Batch Size Sweep (100k persons)</text>
+<line x1="80" y1="50" x2="80" y2="340" stroke="#ccc"/>
+<line x1="80" y1="340" x2="640" y2="340" stroke="#ccc"/>
+<text x="80" y="360" text-anchor="middle" font-size="11">50</text>
+<text x="94" y="360" text-anchor="middle" font-size="11">100</text>
+<text x="108" y="360" text-anchor="middle" font-size="11">150</text>
+<text x="123" y="360" text-anchor="middle" font-size="11">200</text>
+<text x="137" y="360" text-anchor="middle" font-size="11">250</text>
+<text x="151" y="360" text-anchor="middle" font-size="11">300</text>
+<text x="166" y="360" text-anchor="middle" font-size="11">350</text>
+<text x="180" y="360" text-anchor="middle" font-size="11">400</text>
+<text x="194" y="360" text-anchor="middle" font-size="11">450</text>
+<text x="209" y="360" text-anchor="middle" font-size="11">500</text>
+<text x="223" y="360" text-anchor="middle" font-size="11">550</text>
+<text x="237" y="360" text-anchor="middle" font-size="11">600</text>
+<text x="252" y="360" text-anchor="middle" font-size="11">650</text>
+<text x="266" y="360" text-anchor="middle" font-size="11">700</text>
+<text x="281" y="360" text-anchor="middle" font-size="11">750</text>
+<text x="295" y="360" text-anchor="middle" font-size="11">800</text>
+<text x="309" y="360" text-anchor="middle" font-size="11">850</text>
+<text x="324" y="360" text-anchor="middle" font-size="11">900</text>
+<text x="338" y="360" text-anchor="middle" font-size="11">950</text>
+<text x="352" y="360" text-anchor="middle" font-size="11">1000</text>
+<text x="367" y="360" text-anchor="middle" font-size="11">1050</text>
+<text x="381" y="360" text-anchor="middle" font-size="11">1100</text>
+<text x="395" y="360" text-anchor="middle" font-size="11">1150</text>
+<text x="410" y="360" text-anchor="middle" font-size="11">1200</text>
+<text x="424" y="360" text-anchor="middle" font-size="11">1250</text>
+<text x="438" y="360" text-anchor="middle" font-size="11">1300</text>
+<text x="453" y="360" text-anchor="middle" font-size="11">1350</text>
+<text x="467" y="360" text-anchor="middle" font-size="11">1400</text>
+<text x="482" y="360" text-anchor="middle" font-size="11">1450</text>
+<text x="496" y="360" text-anchor="middle" font-size="11">1500</text>
+<text x="510" y="360" text-anchor="middle" font-size="11">1550</text>
+<text x="525" y="360" text-anchor="middle" font-size="11">1600</text>
+<text x="539" y="360" text-anchor="middle" font-size="11">1650</text>
+<text x="553" y="360" text-anchor="middle" font-size="11">1700</text>
+<text x="568" y="360" text-anchor="middle" font-size="11">1750</text>
+<text x="582" y="360" text-anchor="middle" font-size="11">1800</text>
+<text x="596" y="360" text-anchor="middle" font-size="11">1850</text>
+<text x="611" y="360" text-anchor="middle" font-size="11">1900</text>
+<text x="625" y="360" text-anchor="middle" font-size="11">1950</text>
+<text x="640" y="360" text-anchor="middle" font-size="11">2000</text>
+<line x1="80" y1="50" x2="640" y2="50" stroke="#eee"/>
+<text x="72" y="54" text-anchor="end" font-size="10" fill="#999">6471</text>
+<line x1="80" y1="122" x2="640" y2="122" stroke="#eee"/>
+<text x="72" y="126" text-anchor="end" font-size="10" fill="#999">4853</text>
+<line x1="80" y1="195" x2="640" y2="195" stroke="#eee"/>
+<text x="72" y="199" text-anchor="end" font-size="10" fill="#999">3235</text>
+<line x1="80" y1="267" x2="640" y2="267" stroke="#eee"/>
+<text x="72" y="271" text-anchor="end" font-size="10" fill="#999">1617</text>
+<line x1="80" y1="340" x2="640" y2="340" stroke="#eee"/>
+<text x="72" y="344" text-anchor="end" font-size="10" fill="#999">0</text>
+<polyline points="80,136 94,201 108,240 123,257 137,268 151,270 166,286 180,287 194,296 209,297 223,300 237,303 252,305 266,279 281,293 295,287 309,297 324,303 338,302 352,291 367,296 381,306 395,307 410,303 424,312 438,304 453,308 467,310 482,308 496,308 510,305 525,306 539,308 553,308 568,314 582,310 596,309 611,307 625,306 640,313" fill="none" stroke="#2196F3" stroke-width="2.5"/>
+<circle cx="80" cy="136" r="4" fill="#2196F3"/>
+<circle cx="94" cy="201" r="4" fill="#2196F3"/>
+<circle cx="108" cy="240" r="4" fill="#2196F3"/>
+<circle cx="123" cy="257" r="4" fill="#2196F3"/>
+<circle cx="137" cy="268" r="4" fill="#2196F3"/>
+<circle cx="151" cy="270" r="4" fill="#2196F3"/>
+<circle cx="166" cy="286" r="4" fill="#2196F3"/>
+<circle cx="180" cy="287" r="4" fill="#2196F3"/>
+<circle cx="194" cy="296" r="4" fill="#2196F3"/>
+<circle cx="209" cy="297" r="4" fill="#2196F3"/>
+<circle cx="223" cy="300" r="4" fill="#2196F3"/>
+<circle cx="237" cy="303" r="4" fill="#2196F3"/>
+<circle cx="252" cy="305" r="4" fill="#2196F3"/>
+<circle cx="266" cy="279" r="4" fill="#2196F3"/>
+<circle cx="281" cy="293" r="4" fill="#2196F3"/>
+<circle cx="295" cy="287" r="4" fill="#2196F3"/>
+<circle cx="309" cy="297" r="4" fill="#2196F3"/>
+<circle cx="324" cy="303" r="4" fill="#2196F3"/>
+<circle cx="338" cy="302" r="4" fill="#2196F3"/>
+<circle cx="352" cy="291" r="4" fill="#2196F3"/>
+<circle cx="367" cy="296" r="4" fill="#2196F3"/>
+<circle cx="381" cy="306" r="4" fill="#2196F3"/>
+<circle cx="395" cy="307" r="4" fill="#2196F3"/>
+<circle cx="410" cy="303" r="4" fill="#2196F3"/>
+<circle cx="424" cy="312" r="4" fill="#2196F3"/>
+<circle cx="438" cy="304" r="4" fill="#2196F3"/>
+<circle cx="453" cy="308" r="4" fill="#2196F3"/>
+<circle cx="467" cy="310" r="4" fill="#2196F3"/>
+<circle cx="482" cy="308" r="4" fill="#2196F3"/>
+<circle cx="496" cy="308" r="4" fill="#2196F3"/>
+<circle cx="510" cy="305" r="4" fill="#2196F3"/>
+<circle cx="525" cy="306" r="4" fill="#2196F3"/>
+<circle cx="539" cy="308" r="4" fill="#2196F3"/>
+<circle cx="553" cy="308" r="4" fill="#2196F3"/>
+<circle cx="568" cy="314" r="4" fill="#2196F3"/>
+<circle cx="582" cy="310" r="4" fill="#2196F3"/>
+<circle cx="596" cy="309" r="4" fill="#2196F3"/>
+<circle cx="611" cy="307" r="4" fill="#2196F3"/>
+<circle cx="625" cy="306" r="4" fill="#2196F3"/>
+<circle cx="640" cy="313" r="4" fill="#2196F3"/>
+<rect x="655" y="62" width="12" height="12" fill="#2196F3"/>
+<text x="671" y="73" font-size="11">Bulk API</text>
+<polyline points="80,50 94,70 108,99 123,103 137,82 151,132 166,99 180,139 194,194 209,203 223,206 237,207 252,214 266,213 281,213 295,207 309,207 324,142 338,123 352,140 367,166 381,175 395,170 410,205 424,197 438,202 453,181 467,202 482,203 496,204 510,189 525,206 539,191 553,192 568,178 582,143 596,187 611,183 625,197 640,183" fill="none" stroke="#9C27B0" stroke-width="2.5"/>
+<circle cx="80" cy="50" r="4" fill="#9C27B0"/>
+<circle cx="94" cy="70" r="4" fill="#9C27B0"/>
+<circle cx="108" cy="99" r="4" fill="#9C27B0"/>
+<circle cx="123" cy="103" r="4" fill="#9C27B0"/>
+<circle cx="137" cy="82" r="4" fill="#9C27B0"/>
+<circle cx="151" cy="132" r="4" fill="#9C27B0"/>
+<circle cx="166" cy="99" r="4" fill="#9C27B0"/>
+<circle cx="180" cy="139" r="4" fill="#9C27B0"/>
+<circle cx="194" cy="194" r="4" fill="#9C27B0"/>
+<circle cx="209" cy="203" r="4" fill="#9C27B0"/>
+<circle cx="223" cy="206" r="4" fill="#9C27B0"/>
+<circle cx="237" cy="207" r="4" fill="#9C27B0"/>
+<circle cx="252" cy="214" r="4" fill="#9C27B0"/>
+<circle cx="266" cy="213" r="4" fill="#9C27B0"/>
+<circle cx="281" cy="213" r="4" fill="#9C27B0"/>
+<circle cx="295" cy="207" r="4" fill="#9C27B0"/>
+<circle cx="309" cy="207" r="4" fill="#9C27B0"/>
+<circle cx="324" cy="142" r="4" fill="#9C27B0"/>
+<circle cx="338" cy="123" r="4" fill="#9C27B0"/>
+<circle cx="352" cy="140" r="4" fill="#9C27B0"/>
+<circle cx="367" cy="166" r="4" fill="#9C27B0"/>
+<circle cx="381" cy="175" r="4" fill="#9C27B0"/>
+<circle cx="395" cy="170" r="4" fill="#9C27B0"/>
+<circle cx="410" cy="205" r="4" fill="#9C27B0"/>
+<circle cx="424" cy="197" r="4" fill="#9C27B0"/>
+<circle cx="438" cy="202" r="4" fill="#9C27B0"/>
+<circle cx="453" cy="181" r="4" fill="#9C27B0"/>
+<circle cx="467" cy="202" r="4" fill="#9C27B0"/>
+<circle cx="482" cy="203" r="4" fill="#9C27B0"/>
+<circle cx="496" cy="204" r="4" fill="#9C27B0"/>
+<circle cx="510" cy="189" r="4" fill="#9C27B0"/>
+<circle cx="525" cy="206" r="4" fill="#9C27B0"/>
+<circle cx="539" cy="191" r="4" fill="#9C27B0"/>
+<circle cx="553" cy="192" r="4" fill="#9C27B0"/>
+<circle cx="568" cy="178" r="4" fill="#9C27B0"/>
+<circle cx="582" cy="143" r="4" fill="#9C27B0"/>
+<circle cx="596" cy="187" r="4" fill="#9C27B0"/>
+<circle cx="611" cy="183" r="4" fill="#9C27B0"/>
+<circle cx="625" cy="197" r="4" fill="#9C27B0"/>
+<circle cx="640" cy="183" r="4" fill="#9C27B0"/>
+<rect x="655" y="82" width="12" height="12" fill="#9C27B0"/>
+<text x="671" y="93" font-size="11">JdbcTemplate</text>
+</svg>

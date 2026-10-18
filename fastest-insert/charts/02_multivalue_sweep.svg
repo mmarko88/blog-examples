@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="700" height="400" font-family="Segoe UI, Arial, sans-serif">
+<rect width="700" height="400" fill="white"/>
+<text x="350" y="30" text-anchor="middle" font-size="16" font-weight="bold">Multi-Value objectsPerInsert Sweep (JdbcTemplate, batch=1000)</text>
+<line x1="80" y1="50" x2="80" y2="340" stroke="#ccc"/>
+<line x1="80" y1="340" x2="540" y2="340" stroke="#ccc"/>
+<text x="80" y="360" text-anchor="middle" font-size="11">1</text>
+<text x="145" y="360" text-anchor="middle" font-size="11">10</text>
+<text x="211" y="360" text-anchor="middle" font-size="11">25</text>
+<text x="277" y="360" text-anchor="middle" font-size="11">50</text>
+<text x="342" y="360" text-anchor="middle" font-size="11">100</text>
+<text x="408" y="360" text-anchor="middle" font-size="11">200</text>
+<text x="474" y="360" text-anchor="middle" font-size="11">300</text>
+<text x="540" y="360" text-anchor="middle" font-size="11">400</text>
+<line x1="80" y1="50" x2="540" y2="50" stroke="#eee"/>
+<text x="72" y="54" text-anchor="end" font-size="10" fill="#999">3984</text>
+<line x1="80" y1="122" x2="540" y2="122" stroke="#eee"/>
+<text x="72" y="126" text-anchor="end" font-size="10" fill="#999">2988</text>
+<line x1="80" y1="195" x2="540" y2="195" stroke="#eee"/>
+<text x="72" y="199" text-anchor="end" font-size="10" fill="#999">1992</text>
+<line x1="80" y1="267" x2="540" y2="267" stroke="#eee"/>
+<text x="72" y="271" text-anchor="end" font-size="10" fill="#999">996</text>
+<line x1="80" y1="340" x2="540" y2="340" stroke="#eee"/>
+<text x="72" y="344" text-anchor="end" font-size="10" fill="#999">0</text>
+<polyline points="80,50 145,216 211,234 277,265 342,269 408,280 474,265 540,242" fill="none" stroke="#9C27B0" stroke-width="2.5"/>
+<circle cx="80" cy="50" r="4" fill="#9C27B0"/>
+<circle cx="145" cy="216" r="4" fill="#9C27B0"/>
+<circle cx="211" cy="234" r="4" fill="#9C27B0"/>
+<circle cx="277" cy="265" r="4" fill="#9C27B0"/>
+<circle cx="342" cy="269" r="4" fill="#9C27B0"/>
+<circle cx="408" cy="280" r="4" fill="#9C27B0"/>
+<circle cx="474" cy="265" r="4" fill="#9C27B0"/>
+<circle cx="540" cy="242" r="4" fill="#9C27B0"/>
+<rect x="555" y="62" width="12" height="12" fill="#9C27B0"/>
+<text x="571" y="73" font-size="11">JdbcTemplate</text>
+</svg>

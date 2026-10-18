@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="342" font-family="Segoe UI, Arial, sans-serif">
+<rect width="800" height="342" fill="white"/>
+<text x="400" y="30" text-anchor="middle" font-size="16" font-weight="bold">Row Size, Compression & Columnstore (JDBC batch)</text>
+<text x="272" y="69" text-anchor="end" font-size="12">Narrow (5 cols)</text>
+<rect x="280" y="50" width="165" height="28" fill="#4CAF50" rx="3"/>
+<text x="450" y="69" font-size="12" fill="#333">3699 ms</text>
+<text x="272" y="103" text-anchor="end" font-size="12">Wide (17 cols)</text>
+<rect x="280" y="84" width="311" height="28" fill="#FF9800" rx="3"/>
+<text x="596" y="103" font-size="12" fill="#333">6952 ms</text>
+<text x="272" y="137" text-anchor="end" font-size="12">LOB (NVARCHAR MAX)
+50k rows</text>
+<rect x="280" y="118" width="440" height="28" fill="#F44336" rx="3"/>
+<text x="725" y="137" font-size="12" fill="#333">9834 ms</text>
+<text x="272" y="171" text-anchor="end" font-size="12">No compression</text>
+<rect x="280" y="152" width="108" height="28" fill="#2196F3" rx="3"/>
+<text x="393" y="171" font-size="12" fill="#333">2417 ms</text>
+<text x="272" y="205" text-anchor="end" font-size="12">ROW compression</text>
+<rect x="280" y="186" width="116" height="28" fill="#00BCD4" rx="3"/>
+<text x="401" y="205" font-size="12" fill="#333">2595 ms</text>
+<text x="272" y="239" text-anchor="end" font-size="12">PAGE compression</text>
+<rect x="280" y="220" width="144" height="28" fill="#9C27B0" rx="3"/>
+<text x="429" y="239" font-size="12" fill="#333">3229 ms</text>
+<text x="272" y="273" text-anchor="end" font-size="12">Columnstore 1k</text>
+<rect x="280" y="254" width="375" height="28" fill="#795548" rx="3"/>
+<text x="660" y="273" font-size="12" fill="#333">8402 ms</text>
+<text x="272" y="307" text-anchor="end" font-size="12">Columnstore 5k</text>
+<rect x="280" y="288" width="218" height="28" fill="#795548" rx="3"/>
+<text x="503" y="307" font-size="12" fill="#333">4880 ms</text>
+</svg>
