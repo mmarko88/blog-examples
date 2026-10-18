@@ -4,9 +4,16 @@ import dev.professional.blog.fastinsert.common.Person;
 import dev.professional.blog.fastinsert.common.PersonDescriptors;
 import dev.professional.blog.fastinsert.hibernate.ChunkEntityPersistRepository;
 import dev.professional.blog.fastinsert.hibernate.PersonPersistService;
+import dev.professional.blog.fastinsert.hibernate5.PersistablePerson;
+import dev.professional.blog.fastinsert.hibernate5.PersistablePersonRepository;
+import dev.professional.blog.fastinsert.hibernate5.StatelessSessionInsertRepository;
+import dev.professional.blog.fastinsert.index.IndexBenchmarkHelper;
 import dev.professional.blog.fastinsert.jdbc.BulkCopyRepository;
 import dev.professional.blog.fastinsert.jdbc.BulkPersistCustomRepository;
 import dev.professional.blog.fastinsert.jdbc.SpringTemplateBulkInsertRepository;
+import dev.professional.blog.fastinsert.parallel.ParallelInsertExecutor;
+import dev.professional.blog.fastinsert.tvp.PlainJdbcInsertRepository;
+import dev.professional.blog.fastinsert.tvp.TvpInsertRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import lombok.RequiredArgsConstructor;
@@ -14,6 +21,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Orchestrates all insert strategies for benchmarking.
@@ -30,6 +38,16 @@ public class FastInsertService {
     private final BulkPersistCustomRepository bulkPersistCustomRepository;
     private final SpringTemplateBulkInsertRepository springTemplateBulkInsertRepository;
     private final BulkCopyRepository bulkCopyRepository;
+    // Part 5
+    private final StatelessSessionInsertRepository statelessSessionInsertRepository;
+    private final PersistablePersonRepository persistablePersonRepository;
+    // Part 6
+    private final ParallelInsertExecutor parallelInsertExecutor;
+    // Part 7
+    private final IndexBenchmarkHelper indexBenchmarkHelper;
+    // Part 8
+    private final TvpInsertRepository tvpInsertRepository;
+    private final PlainJdbcInsertRepository plainJdbcInsertRepository;
 
     public void cleanUpPeopleTable() {
         entityManager.createNativeQuery("truncate table person").executeUpdate();
@@ -59,5 +77,58 @@ public class FastInsertService {
     /** Part 2: MS SQL Bulk Copy API */
     public void insertBulkApi(List<Person> people, int batchSize) {
         bulkCopyRepository.performBulkInsert(people, PersonDescriptors.PERSON_TABLE, batchSize);
+    }
+
+    // ---- Part 5: Hibernate Tuning ----
+
+    /** Part 5: Hibernate StatelessSession (no 1st-level cache, no dirty checking) */
+    public void insertStatelessSession(List<Person> people, int batchSize) {
+        statelessSessionInsertRepository.insertStateless(people, batchSize);
+    }
+
+    /** Part 5: saveAll with Persistable (avoids SELECT-before-INSERT) */
+    public void saveAllPersistable(List<Person> people) {
+        List<PersistablePerson> persistable = people.stream()
+                .map(p -> new PersistablePerson(
+                        p.getPersonId(), p.getUserName(), p.getFirstName(),
+                        p.getLastName(), p.getYears(), true))
+                .collect(Collectors.toList());
+        persistablePersonRepository.saveAllAndFlush(persistable);
+    }
+
+    // ---- Part 6: Parallel Inserts ----
+
+    /** Part 6: Parallel Bulk API across N threads */
+    public void insertParallelBulkApi(List<Person> people, int batchSize, int threadCount) {
+        parallelInsertExecutor.parallelBulkApiInsert(people, PersonDescriptors.PERSON_TABLE, batchSize, threadCount);
+    }
+
+    /** Part 6: Parallel JdbcTemplate across N threads */
+    public void insertParallelJdbcTemplate(List<Person> people, int batchSize, int objectsPerInsert, int threadCount) {
+        parallelInsertExecutor.parallelJdbcTemplateInsert(people, PersonDescriptors.PERSON_TABLE, batchSize, objectsPerInsert, threadCount);
+    }
+
+    // ---- Part 7: Index Impact ----
+
+    /** Part 7: Set the number of non-clustered indexes on person table */
+    public void setIndexCount(int count) {
+        indexBenchmarkHelper.setIndexCount(count);
+    }
+
+    // ---- Part 8: TVP + Plain JDBC ----
+
+    /** Part 8: Table-Valued Parameters */
+    public void insertWithTvp(List<Person> people, int batchSize) {
+        tvpInsertRepository.insertWithTvp(people, batchSize);
+    }
+
+    /** Part 8: Ensure TVP type exists in database */
+    public void ensureTvpTypeExists() {
+        tvpInsertRepository.ensureTvpTypeExists();
+    }
+
+    /** Part 8: Plain JDBC PreparedStatement (no Hibernate/JPA overhead) */
+    public void insertPlainJdbc(List<Person> people, int batchSize) {
+        plainJdbcInsertRepository.insertBatch(people, batchSize);
     }
 }

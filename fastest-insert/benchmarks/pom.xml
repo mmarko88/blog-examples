@@ -36,6 +36,22 @@
             <artifactId>fastest-insert-part4-bulk-copy-parameter</artifactId>
         </dependency>
         <dependency>
+            <groupId>dev.professional.blog</groupId>
+            <artifactId>fastest-insert-part5-hibernate-tuning</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>dev.professional.blog</groupId>
+            <artifactId>fastest-insert-part6-parallel-inserts</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>dev.professional.blog</groupId>
+            <artifactId>fastest-insert-part7-index-impact</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>dev.professional.blog</groupId>
+            <artifactId>fastest-insert-part8-tvp-jdbc</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>

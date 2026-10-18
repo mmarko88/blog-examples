@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>dev.professional.blog</groupId>
+        <artifactId>fastest-insert</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>fastest-insert-part7-index-impact</artifactId>
+    <name>Part 7 — Index Impact</name>
+    <description>How non-clustered indexes affect insert performance with 0, 1, 3, 5 indexes (blog post: Part 7)</description>
+
+    <dependencies>
+        <dependency>
+            <groupId>dev.professional.blog</groupId>
+            <artifactId>fastest-insert-common</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+    </dependencies>
+</project>

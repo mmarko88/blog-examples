@@ -24,6 +24,10 @@
         <module>part2-jdbc-strategies</module>
         <module>part3-multivalue-insert</module>
         <module>part4-bulk-copy-parameter</module>
+        <module>part5-hibernate-tuning</module>
+        <module>part6-parallel-inserts</module>
+        <module>part7-index-impact</module>
+        <module>part8-tvp-jdbc</module>
         <module>benchmarks</module>
     </modules>
 
@@ -57,6 +61,26 @@
             <dependency>
                 <groupId>dev.professional.blog</groupId>
                 <artifactId>fastest-insert-part4-bulk-copy-parameter</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>dev.professional.blog</groupId>
+                <artifactId>fastest-insert-part5-hibernate-tuning</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>dev.professional.blog</groupId>
+                <artifactId>fastest-insert-part6-parallel-inserts</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>dev.professional.blog</groupId>
+                <artifactId>fastest-insert-part7-index-impact</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>dev.professional.blog</groupId>
+                <artifactId>fastest-insert-part8-tvp-jdbc</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
