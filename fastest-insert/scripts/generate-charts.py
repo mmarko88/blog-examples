@@ -422,6 +422,21 @@ def main():
                   [d[2] for d in sw_data], width=900,
                   filename=os.path.join(out_dir, '16_snapshot_switch.svg'))
 
+    # ---- Chart 17: XML/JSON indexes & tempdb spill ----
+    print('Chart 17: XML/JSON indexes + spill')
+    xj_data = [
+        ('INSERT…SELECT (normal grant)', 326, '#4CAF50'),
+        ('INSERT…SELECT (tiny grant, SPILL)', 657, '#FFC107'),
+        ('JSON no index', 5774, '#2196F3'),
+        ('JSON + computed-col index', 8493, '#9C27B0'),
+        ('XML no index', 8339, '#FF9800'),
+        ('XML + primary XML index', 38265, '#F44336'),
+    ]
+    svg_bar_chart('XML/JSON Indexes & tempdb Spill (100k persons)',
+                  [d[0] for d in xj_data], [d[1] for d in xj_data],
+                  [d[2] for d in xj_data], width=900,
+                  filename=os.path.join(out_dir, '17_xmljson_spill.svg'))
+
     print(f'\nAll charts generated in {out_dir}/')
 
 

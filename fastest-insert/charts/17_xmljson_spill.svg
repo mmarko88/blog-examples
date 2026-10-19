@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="274" font-family="Segoe UI, Arial, sans-serif">
+<rect width="900" height="274" fill="white"/>
+<text x="450" y="30" text-anchor="middle" font-size="16" font-weight="bold">XML/JSON Indexes & tempdb Spill (100k persons)</text>
+<text x="272" y="69" text-anchor="end" font-size="12">INSERT…SELECT (normal grant)</text>
+<rect x="280" y="50" width="4" height="28" fill="#4CAF50" rx="3"/>
+<text x="289" y="69" font-size="12" fill="#333">326 ms</text>
+<text x="272" y="103" text-anchor="end" font-size="12">INSERT…SELECT (tiny grant, SPILL)</text>
+<rect x="280" y="84" width="9" height="28" fill="#FFC107" rx="3"/>
+<text x="294" y="103" font-size="12" fill="#333">657 ms</text>
+<text x="272" y="137" text-anchor="end" font-size="12">JSON no index</text>
+<rect x="280" y="118" width="81" height="28" fill="#2196F3" rx="3"/>
+<text x="366" y="137" font-size="12" fill="#333">5774 ms</text>
+<text x="272" y="171" text-anchor="end" font-size="12">JSON + computed-col index</text>
+<rect x="280" y="152" width="119" height="28" fill="#9C27B0" rx="3"/>
+<text x="404" y="171" font-size="12" fill="#333">8493 ms</text>
+<text x="272" y="205" text-anchor="end" font-size="12">XML no index</text>
+<rect x="280" y="186" width="117" height="28" fill="#FF9800" rx="3"/>
+<text x="402" y="205" font-size="12" fill="#333">8339 ms</text>
+<text x="272" y="239" text-anchor="end" font-size="12">XML + primary XML index</text>
+<rect x="280" y="220" width="540" height="28" fill="#F44336" rx="3"/>
+<text x="825" y="239" font-size="12" fill="#333">38265 ms</text>
+</svg>
