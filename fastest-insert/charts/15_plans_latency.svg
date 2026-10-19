@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="950" height="444" font-family="Segoe UI, Arial, sans-serif">
+<rect width="950" height="444" fill="white"/>
+<text x="475" y="30" text-anchor="middle" font-size="16" font-weight="bold">Query Plans, Latency & INSERT…SELECT (100k persons)</text>
+<text x="272" y="69" text-anchor="end" font-size="12">INSERT ... SELECT (server-side)</text>
+<rect x="280" y="50" width="1" height="28" fill="#4CAF50" rx="3"/>
+<text x="286" y="69" font-size="12" fill="#333">319 ms</text>
+<text x="272" y="103" text-anchor="end" font-size="12">INSERT ... SELECT ORDER BY</text>
+<rect x="280" y="84" width="1" height="28" fill="#8BC34A" rx="3"/>
+<text x="286" y="103" font-size="12" fill="#333">447 ms</text>
+<text x="272" y="137" text-anchor="end" font-size="12">BulkCopy batch=5000</text>
+<rect x="280" y="118" width="2" height="28" fill="#2196F3" rx="3"/>
+<text x="287" y="137" font-size="12" fill="#333">535 ms</text>
+<text x="272" y="171" text-anchor="end" font-size="12">BulkCopy +checkConstraints</text>
+<rect x="280" y="152" width="2" height="28" fill="#00BCD4" rx="3"/>
+<text x="287" y="171" font-size="12" fill="#333">619 ms</text>
+<text x="272" y="205" text-anchor="end" font-size="12">BulkCopy +TABLOCK</text>
+<rect x="280" y="186" width="2" height="28" fill="#9C27B0" rx="3"/>
+<text x="287" y="205" font-size="12" fill="#333">662 ms</text>
+<text x="272" y="239" text-anchor="end" font-size="12">BulkCopy default (batch=1000)</text>
+<rect x="280" y="220" width="3" height="28" fill="#607D8B" rx="3"/>
+<text x="288" y="239" font-size="12" fill="#333">765 ms</text>
+<text x="272" y="273" text-anchor="end" font-size="12">Latency 0ms baseline</text>
+<rect x="280" y="254" width="11" height="28" fill="#FFC107" rx="3"/>
+<text x="296" y="273" font-size="12" fill="#333">2759 ms</text>
+<text x="272" y="307" text-anchor="end" font-size="12">Latency +1ms/batch</text>
+<rect x="280" y="288" width="11" height="28" fill="#FF9800" rx="3"/>
+<text x="296" y="307" font-size="12" fill="#333">2948 ms</text>
+<text x="272" y="341" text-anchor="end" font-size="12">Latency +5ms/batch</text>
+<rect x="280" y="322" width="17" height="28" fill="#FF5722" rx="3"/>
+<text x="302" y="341" font-size="12" fill="#333">4370 ms</text>
+<text x="272" y="375" text-anchor="end" font-size="12">Plan cached (default)</text>
+<rect x="280" y="356" width="11" height="28" fill="#795548" rx="3"/>
+<text x="296" y="375" font-size="12" fill="#333">2772 ms</text>
+<text x="272" y="409" text-anchor="end" font-size="12">OPTION(RECOMPILE) !!</text>
+<rect x="280" y="390" width="590" height="28" fill="#F44336" rx="3"/>
+<text x="875" y="409" font-size="12" fill="#333">145097 ms</text>
+</svg>

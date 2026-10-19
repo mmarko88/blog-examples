@@ -386,6 +386,26 @@ def main():
                   [d[2] for d in id_data], width=900,
                   filename=os.path.join(out_dir, '14_identity_fk.svg'))
 
+    # ---- Chart 15: Final patterns ----
+    print('Chart 15: Plans, Latency, SELECT')
+    fp_data = [
+        ('INSERT ... SELECT (server-side)', 319, '#4CAF50'),
+        ('INSERT ... SELECT ORDER BY', 447, '#8BC34A'),
+        ('BulkCopy batch=5000', 535, '#2196F3'),
+        ('BulkCopy +checkConstraints', 619, '#00BCD4'),
+        ('BulkCopy +TABLOCK', 662, '#9C27B0'),
+        ('BulkCopy default (batch=1000)', 765, '#607D8B'),
+        ('Latency 0ms baseline', 2759, '#FFC107'),
+        ('Latency +1ms/batch', 2948, '#FF9800'),
+        ('Latency +5ms/batch', 4370, '#FF5722'),
+        ('Plan cached (default)', 2772, '#795548'),
+        ('OPTION(RECOMPILE) !!', 145097, '#F44336'),
+    ]
+    svg_bar_chart('Query Plans, Latency & INSERT…SELECT (100k persons)',
+                  [d[0] for d in fp_data], [d[1] for d in fp_data],
+                  [d[2] for d in fp_data], width=950,
+                  filename=os.path.join(out_dir, '15_plans_latency.svg'))
+
     print(f'\nAll charts generated in {out_dir}/')
 
 
