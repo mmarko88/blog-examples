@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="308" font-family="Segoe UI, Arial, sans-serif">
+<rect width="900" height="308" fill="white"/>
+<text x="450" y="30" text-anchor="middle" font-size="16" font-weight="bold">In-Memory OLTP, BULK INSERT & Procs (100k persons)</text>
+<text x="272" y="69" text-anchor="end" font-size="12">BULK INSERT (server-side file)</text>
+<rect x="280" y="50" width="5" height="28" fill="#4CAF50" rx="3"/>
+<text x="290" y="69" font-size="12" fill="#333">637 ms</text>
+<text x="272" y="103" text-anchor="end" font-size="12">In-Memory interpreted</text>
+<rect x="280" y="84" width="25" height="28" fill="#2196F3" rx="3"/>
+<text x="310" y="103" font-size="12" fill="#333">2726 ms</text>
+<text x="272" y="137" text-anchor="end" font-size="12">Ad-hoc INSERT (baseline)</text>
+<rect x="280" y="118" width="25" height="28" fill="#607D8B" rx="3"/>
+<text x="310" y="137" font-size="12" fill="#333">2734 ms</text>
+<text x="272" y="171" text-anchor="end" font-size="12">Check constraints disabled</text>
+<rect x="280" y="152" width="26" height="28" fill="#00BCD4" rx="3"/>
+<text x="311" y="171" font-size="12" fill="#333">2909 ms</text>
+<text x="272" y="205" text-anchor="end" font-size="12">Check constraints enabled</text>
+<rect x="280" y="186" width="27" height="28" fill="#00BCD4" rx="3"/>
+<text x="312" y="205" font-size="12" fill="#333">2954 ms</text>
+<text x="272" y="239" text-anchor="end" font-size="12">Stored procedure (interpreted)</text>
+<rect x="280" y="220" width="44" height="28" fill="#FF9800" rx="3"/>
+<text x="329" y="239" font-size="12" fill="#333">4807 ms</text>
+<text x="272" y="273" text-anchor="end" font-size="12">In-Memory natively compiled proc (no batch)</text>
+<rect x="280" y="254" width="540" height="28" fill="#F44336" rx="3"/>
+<text x="825" y="273" font-size="12" fill="#333">58542 ms</text>
+</svg>

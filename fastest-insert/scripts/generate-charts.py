@@ -353,6 +353,22 @@ def main():
                   [d[2] for d in ct_data],
                   filename=os.path.join(out_dir, '12_column_types.svg'))
 
+    # ---- Chart 13: In-Memory, BULK INSERT, procs ----
+    print('Chart 13: In-Memory & BULK')
+    im_data = [
+        ('BULK INSERT (server-side file)', 637, '#4CAF50'),
+        ('In-Memory interpreted', 2726, '#2196F3'),
+        ('Ad-hoc INSERT (baseline)', 2734, '#607D8B'),
+        ('Check constraints disabled', 2909, '#00BCD4'),
+        ('Check constraints enabled', 2954, '#00BCD4'),
+        ('Stored procedure (interpreted)', 4807, '#FF9800'),
+        ('In-Memory natively compiled proc (no batch)', 58542, '#F44336'),
+    ]
+    svg_bar_chart('In-Memory OLTP, BULK INSERT & Procs (100k persons)',
+                  [d[0] for d in im_data], [d[1] for d in im_data],
+                  [d[2] for d in im_data], width=900,
+                  filename=os.path.join(out_dir, '13_inmem_bulk.svg'))
+
     print(f'\nAll charts generated in {out_dir}/')
 
 
