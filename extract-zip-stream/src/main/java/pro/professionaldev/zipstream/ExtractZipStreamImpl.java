@@ -4,6 +4,7 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
@@ -38,7 +39,11 @@ public class ExtractZipStreamImpl implements ExtractZipStream {
     }
 
     public void extract(InputStream zipStream, Consumer<FileContainer> extractedFileConsumer) throws IOException {
-        try (ZipInputStream zipInputStream = new ZipInputStream(zipStream)) {
+        // Cp437 (IBM437) is the historical ZIP filename charset. Using it instead of the JVM
+        // default (often UTF-8) prevents IllegalArgumentException on hostile zips that encode
+        // filenames in another code page, which would otherwise abort mid-stream and leave the
+        // archive half-extracted.
+        try (ZipInputStream zipInputStream = new ZipInputStream(zipStream, Charset.forName("Cp437"))) {
             processZipInputStream(zipInputStream, extractedFileConsumer);
         }
     }

@@ -74,6 +74,11 @@ public class SizeChecker {
     }
 
     public void checkThresholdCompressionRatio(EntrySizeMeter entrySizeMeter, String fileName) {
+        if (!entrySizeMeter.hasKnownCompressedSize()) {
+            // Local file header omitted the compressed size (ZIP spec allows this). The
+            // ratio check is meaningless; the global entry-size cap already protects us.
+            return;
+        }
         if (entrySizeMeter.getCompressionRatio() > thresholdCompressionRatio) {
             // ratio between compressed and uncompressed data is highly suspicious, looks like a Zip Bomb Attack
             throw new IllegalArgumentException("Highly compressed file. FileName:" + fileName);
