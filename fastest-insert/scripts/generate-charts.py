@@ -369,6 +369,23 @@ def main():
                   [d[2] for d in im_data], width=900,
                   filename=os.path.join(out_dir, '13_inmem_bulk.svg'))
 
+    # ---- Chart 14: Identity / FK / Retry ----
+    print('Chart 14: Identity, FK, Retry')
+    id_data = [
+        ('No FK constraint', 2957, '#4CAF50'),
+        ('App-generated ID', 3085, '#2196F3'),
+        ('FK disabled (NOCHECK)', 3108, '#FFC107'),
+        ('IDENTITY column', 3459, '#9C27B0'),
+        ('FK trusted (CHECK)', 3592, '#FF9800'),
+        ('SET IDENTITY_INSERT ON (explicit)', 3857, '#607D8B'),
+        ('SEQUENCE default', 4052, '#00BCD4'),
+        ('IDENTITY + RETURN_GENERATED_KEYS', 4142, '#F44336'),
+    ]
+    svg_bar_chart('ID Generation & Foreign Keys (100k persons)',
+                  [d[0] for d in id_data], [d[1] for d in id_data],
+                  [d[2] for d in id_data], width=900,
+                  filename=os.path.join(out_dir, '14_identity_fk.svg'))
+
     print(f'\nAll charts generated in {out_dir}/')
 
 

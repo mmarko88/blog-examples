@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="342" font-family="Segoe UI, Arial, sans-serif">
+<rect width="900" height="342" fill="white"/>
+<text x="450" y="30" text-anchor="middle" font-size="16" font-weight="bold">ID Generation & Foreign Keys (100k persons)</text>
+<text x="272" y="69" text-anchor="end" font-size="12">No FK constraint</text>
+<rect x="280" y="50" width="385" height="28" fill="#4CAF50" rx="3"/>
+<text x="670" y="69" font-size="12" fill="#333">2957 ms</text>
+<text x="272" y="103" text-anchor="end" font-size="12">App-generated ID</text>
+<rect x="280" y="84" width="402" height="28" fill="#2196F3" rx="3"/>
+<text x="687" y="103" font-size="12" fill="#333">3085 ms</text>
+<text x="272" y="137" text-anchor="end" font-size="12">FK disabled (NOCHECK)</text>
+<rect x="280" y="118" width="405" height="28" fill="#FFC107" rx="3"/>
+<text x="690" y="137" font-size="12" fill="#333">3108 ms</text>
+<text x="272" y="171" text-anchor="end" font-size="12">IDENTITY column</text>
+<rect x="280" y="152" width="450" height="28" fill="#9C27B0" rx="3"/>
+<text x="735" y="171" font-size="12" fill="#333">3459 ms</text>
+<text x="272" y="205" text-anchor="end" font-size="12">FK trusted (CHECK)</text>
+<rect x="280" y="186" width="468" height="28" fill="#FF9800" rx="3"/>
+<text x="753" y="205" font-size="12" fill="#333">3592 ms</text>
+<text x="272" y="239" text-anchor="end" font-size="12">SET IDENTITY_INSERT ON (explicit)</text>
+<rect x="280" y="220" width="502" height="28" fill="#607D8B" rx="3"/>
+<text x="787" y="239" font-size="12" fill="#333">3857 ms</text>
+<text x="272" y="273" text-anchor="end" font-size="12">SEQUENCE default</text>
+<rect x="280" y="254" width="528" height="28" fill="#00BCD4" rx="3"/>
+<text x="813" y="273" font-size="12" fill="#333">4052 ms</text>
+<text x="272" y="307" text-anchor="end" font-size="12">IDENTITY + RETURN_GENERATED_KEYS</text>
+<rect x="280" y="288" width="540" height="28" fill="#F44336" rx="3"/>
+<text x="825" y="307" font-size="12" fill="#333">4142 ms</text>
+</svg>
