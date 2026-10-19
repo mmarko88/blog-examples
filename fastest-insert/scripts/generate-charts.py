@@ -315,6 +315,25 @@ def main():
                   [d[2] for d in sp_data],
                   filename=os.path.join(out_dir, '10_storage_patterns.svg'))
 
+    # ---- Chart 11: Index Varieties ----
+    print('Chart 11: Index Varieties & Logging')
+    iv_data = [
+        ('TF610 ON + TABLOCK', 2336, '#1565C0'),
+        ('TF610 OFF + TABLOCK', 2386, '#2196F3'),
+        ('No index baseline', 2782, '#4CAF50'),
+        ('Computed cols (1 persisted + 1 non)', 2707, '#00BCD4'),
+        ('Delayed Durability DISABLED', 3147, '#607D8B'),
+        ('Filtered index (17% match)', 3461, '#8BC34A'),
+        ('INCLUDE index', 3824, '#CDDC39'),
+        ('Composite 3-col index', 4071, '#FFC107'),
+        ('Delayed Durability FORCED', 4698, '#FF5722'),
+        ('Full non-clustered index', 4956, '#F44336'),
+    ]
+    svg_bar_chart('Indexes & Logging Patterns (100k persons)',
+                  [d[0] for d in iv_data], [d[1] for d in iv_data],
+                  [d[2] for d in iv_data],
+                  filename=os.path.join(out_dir, '11_index_varieties.svg'))
+
     print(f'\nAll charts generated in {out_dir}/')
 
 

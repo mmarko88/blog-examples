@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="410" font-family="Segoe UI, Arial, sans-serif">
+<rect width="800" height="410" fill="white"/>
+<text x="400" y="30" text-anchor="middle" font-size="16" font-weight="bold">Indexes & Logging Patterns (100k persons)</text>
+<text x="272" y="69" text-anchor="end" font-size="12">TF610 ON + TABLOCK</text>
+<rect x="280" y="50" width="207" height="28" fill="#1565C0" rx="3"/>
+<text x="492" y="69" font-size="12" fill="#333">2336 ms</text>
+<text x="272" y="103" text-anchor="end" font-size="12">TF610 OFF + TABLOCK</text>
+<rect x="280" y="84" width="211" height="28" fill="#2196F3" rx="3"/>
+<text x="496" y="103" font-size="12" fill="#333">2386 ms</text>
+<text x="272" y="137" text-anchor="end" font-size="12">No index baseline</text>
+<rect x="280" y="118" width="246" height="28" fill="#4CAF50" rx="3"/>
+<text x="531" y="137" font-size="12" fill="#333">2782 ms</text>
+<text x="272" y="171" text-anchor="end" font-size="12">Computed cols (1 persisted + 1 non)</text>
+<rect x="280" y="152" width="240" height="28" fill="#00BCD4" rx="3"/>
+<text x="525" y="171" font-size="12" fill="#333">2707 ms</text>
+<text x="272" y="205" text-anchor="end" font-size="12">Delayed Durability DISABLED</text>
+<rect x="280" y="186" width="279" height="28" fill="#607D8B" rx="3"/>
+<text x="564" y="205" font-size="12" fill="#333">3147 ms</text>
+<text x="272" y="239" text-anchor="end" font-size="12">Filtered index (17% match)</text>
+<rect x="280" y="220" width="307" height="28" fill="#8BC34A" rx="3"/>
+<text x="592" y="239" font-size="12" fill="#333">3461 ms</text>
+<text x="272" y="273" text-anchor="end" font-size="12">INCLUDE index</text>
+<rect x="280" y="254" width="339" height="28" fill="#CDDC39" rx="3"/>
+<text x="624" y="273" font-size="12" fill="#333">3824 ms</text>
+<text x="272" y="307" text-anchor="end" font-size="12">Composite 3-col index</text>
+<rect x="280" y="288" width="361" height="28" fill="#FFC107" rx="3"/>
+<text x="646" y="307" font-size="12" fill="#333">4071 ms</text>
+<text x="272" y="341" text-anchor="end" font-size="12">Delayed Durability FORCED</text>
+<rect x="280" y="322" width="417" height="28" fill="#FF5722" rx="3"/>
+<text x="702" y="341" font-size="12" fill="#333">4698 ms</text>
+<text x="272" y="375" text-anchor="end" font-size="12">Full non-clustered index</text>
+<rect x="280" y="356" width="440" height="28" fill="#F44336" rx="3"/>
+<text x="725" y="375" font-size="12" fill="#333">4956 ms</text>
+</svg>
