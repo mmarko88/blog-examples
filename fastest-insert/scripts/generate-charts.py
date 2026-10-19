@@ -334,6 +334,25 @@ def main():
                   [d[2] for d in iv_data],
                   filename=os.path.join(out_dir, '11_index_varieties.svg'))
 
+    # ---- Chart 12: Column Types & Stats ----
+    print('Chart 12: Column Types & Stats')
+    ct_data = [
+        ('Baseline (stats ON)', 2966, '#4CAF50'),
+        ('Nonsparse mostly NULL', 3912, '#2196F3'),
+        ('Baseline (encrypted test)', 3948, '#607D8B'),
+        ('Sparse mostly NULL', 4005, '#00BCD4'),
+        ('AUTO_UPDATE_STATS OFF', 4474, '#FF9800'),
+        ('JSON column (NVARCHAR+ISJSON)', 4752, '#9C27B0'),
+        ('Nonsparse mostly filled', 5053, '#2196F3'),
+        ('Sparse mostly filled', 5772, '#00BCD4'),
+        ('XML column', 10916, '#F44336'),
+        ('ENCRYPTBYPASSPHRASE (3 cols)', 15952, '#E91E63'),
+    ]
+    svg_bar_chart('Column Types, Stats & Encryption (100k persons)',
+                  [d[0] for d in ct_data], [d[1] for d in ct_data],
+                  [d[2] for d in ct_data],
+                  filename=os.path.join(out_dir, '12_column_types.svg'))
+
     print(f'\nAll charts generated in {out_dir}/')
 
 
