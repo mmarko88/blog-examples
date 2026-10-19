@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="308" font-family="Segoe UI, Arial, sans-serif">
+<rect width="800" height="308" fill="white"/>
+<text x="400" y="30" text-anchor="middle" font-size="16" font-weight="bold">Storage Patterns: CT, Temporal, GUID Keys (100k persons)</text>
+<text x="272" y="69" text-anchor="end" font-size="12">Temporal baseline</text>
+<rect x="280" y="50" width="254" height="28" fill="#4CAF50" rx="3"/>
+<text x="539" y="69" font-size="12" fill="#333">3009 ms</text>
+<text x="272" y="103" text-anchor="end" font-size="12">INT clustered (sequential)</text>
+<rect x="280" y="84" width="254" height="28" fill="#2196F3" rx="3"/>
+<text x="539" y="103" font-size="12" fill="#333">3015 ms</text>
+<text x="272" y="137" text-anchor="end" font-size="12">Change Tracking baseline</text>
+<rect x="280" y="118" width="271" height="28" fill="#9C27B0" rx="3"/>
+<text x="556" y="137" font-size="12" fill="#333">3206 ms</text>
+<text x="272" y="171" text-anchor="end" font-size="12">GUID sequential (NEWSEQ)</text>
+<rect x="280" y="152" width="282" height="28" fill="#00BCD4" rx="3"/>
+<text x="567" y="171" font-size="12" fill="#333">3340 ms</text>
+<text x="272" y="205" text-anchor="end" font-size="12">GUID random</text>
+<rect x="280" y="186" width="303" height="28" fill="#FF9800" rx="3"/>
+<text x="588" y="205" font-size="12" fill="#333">3588 ms</text>
+<text x="272" y="239" text-anchor="end" font-size="12">Temporal (SYSTEM_VERSIONED)</text>
+<rect x="280" y="220" width="332" height="28" fill="#9C27B0" rx="3"/>
+<text x="617" y="239" font-size="12" fill="#333">3936 ms</text>
+<text x="272" y="273" text-anchor="end" font-size="12">Change Tracking enabled</text>
+<rect x="280" y="254" width="440" height="28" fill="#F44336" rx="3"/>
+<text x="725" y="273" font-size="12" fill="#333">5205 ms</text>
+</svg>

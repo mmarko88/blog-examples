@@ -299,6 +299,22 @@ def main():
                   [d[2] for d in ap_data],
                   filename=os.path.join(out_dir, '09_advanced_patterns.svg'))
 
+    # ---- Chart 10: Storage Patterns ----
+    print('Chart 10: Storage Patterns')
+    sp_data = [
+        ('Temporal baseline', 3009, '#4CAF50'),
+        ('INT clustered (sequential)', 3015, '#2196F3'),
+        ('Change Tracking baseline', 3206, '#9C27B0'),
+        ('GUID sequential (NEWSEQ)', 3340, '#00BCD4'),
+        ('GUID random', 3588, '#FF9800'),
+        ('Temporal (SYSTEM_VERSIONED)', 3936, '#9C27B0'),
+        ('Change Tracking enabled', 5205, '#F44336'),
+    ]
+    svg_bar_chart('Storage Patterns: CT, Temporal, GUID Keys (100k persons)',
+                  [d[0] for d in sp_data], [d[1] for d in sp_data],
+                  [d[2] for d in sp_data],
+                  filename=os.path.join(out_dir, '10_storage_patterns.svg'))
+
     print(f'\nAll charts generated in {out_dir}/')
 
 
