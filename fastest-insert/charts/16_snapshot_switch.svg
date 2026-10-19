@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="308" font-family="Segoe UI, Arial, sans-serif">
+<rect width="900" height="308" fill="white"/>
+<text x="450" y="30" text-anchor="middle" font-size="16" font-weight="bold">SNAPSHOT Isolation & Partition SWITCH with Indexes</text>
+<text x="272" y="69" text-anchor="end" font-size="12">SWITCH, 0 indexes</text>
+<rect x="280" y="50" width="250" height="28" fill="#4CAF50" rx="3"/>
+<text x="535" y="69" font-size="12" fill="#333">2952 ms</text>
+<text x="272" y="103" text-anchor="end" font-size="12">RC + 4 readers (readers blocked)</text>
+<rect x="280" y="84" width="251" height="28" fill="#8BC34A" rx="3"/>
+<text x="536" y="103" font-size="12" fill="#333">2964 ms</text>
+<text x="272" y="137" text-anchor="end" font-size="12">SNAPSHOT single writer</text>
+<rect x="280" y="118" width="254" height="28" fill="#2196F3" rx="3"/>
+<text x="539" y="137" font-size="12" fill="#333">2997 ms</text>
+<text x="272" y="171" text-anchor="end" font-size="12">SWITCH, 1 index</text>
+<rect x="280" y="152" width="356" height="28" fill="#FFC107" rx="3"/>
+<text x="641" y="171" font-size="12" fill="#333">4205 ms</text>
+<text x="272" y="205" text-anchor="end" font-size="12">SNAPSHOT + 2 readers (430 reads)</text>
+<rect x="280" y="186" width="393" height="28" fill="#9C27B0" rx="3"/>
+<text x="678" y="205" font-size="12" fill="#333">4638 ms</text>
+<text x="272" y="239" text-anchor="end" font-size="12">SNAPSHOT + 4 readers (1100 reads)</text>
+<rect x="280" y="220" width="530" height="28" fill="#F44336" rx="3"/>
+<text x="815" y="239" font-size="12" fill="#333">6259 ms</text>
+<text x="272" y="273" text-anchor="end" font-size="12">SWITCH, 3 indexes</text>
+<rect x="280" y="254" width="540" height="28" fill="#FF5722" rx="3"/>
+<text x="825" y="273" font-size="12" fill="#333">6369 ms</text>
+</svg>

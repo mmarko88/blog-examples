@@ -406,6 +406,22 @@ def main():
                   [d[2] for d in fp_data], width=950,
                   filename=os.path.join(out_dir, '15_plans_latency.svg'))
 
+    # ---- Chart 16: SNAPSHOT + SWITCH with indexes ----
+    print('Chart 16: SNAPSHOT & SWITCH with indexes')
+    sw_data = [
+        ('SWITCH, 0 indexes', 2952, '#4CAF50'),
+        ('RC + 4 readers (readers blocked)', 2964, '#8BC34A'),
+        ('SNAPSHOT single writer', 2997, '#2196F3'),
+        ('SWITCH, 1 index', 4205, '#FFC107'),
+        ('SNAPSHOT + 2 readers (430 reads)', 4638, '#9C27B0'),
+        ('SNAPSHOT + 4 readers (1100 reads)', 6259, '#F44336'),
+        ('SWITCH, 3 indexes', 6369, '#FF5722'),
+    ]
+    svg_bar_chart('SNAPSHOT Isolation & Partition SWITCH with Indexes',
+                  [d[0] for d in sw_data], [d[1] for d in sw_data],
+                  [d[2] for d in sw_data], width=900,
+                  filename=os.path.join(out_dir, '16_snapshot_switch.svg'))
+
     print(f'\nAll charts generated in {out_dir}/')
 
 
