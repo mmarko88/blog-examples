@@ -280,6 +280,25 @@ def main():
                   [d[2] for d in tx_data],
                   filename=os.path.join(out_dir, '08_transaction_gc.svg'))
 
+    # ---- Chart 9: Advanced Patterns ----
+    print('Chart 9: Advanced Patterns')
+    ap_data = [
+        ('RCSI ON (Bulk API)', 720, '#4CAF50'),
+        ('RCSI OFF (Bulk API)', 1211, '#2196F3'),
+        ('Async producer-consumer', 2676, '#00BCD4'),
+        ('RCSI OFF (JDBC)', 2817, '#9C27B0'),
+        ('Plain INSERT', 3177, '#607D8B'),
+        ('No trigger baseline', 3261, '#795548'),
+        ('MERGE upsert', 3514, '#FF9800'),
+        ('RCSI ON (JDBC)', 3565, '#9C27B0'),
+        ('Sync baseline', 3816, '#F44336'),
+        ('AFTER INSERT trigger', 7023, '#E91E63'),
+    ]
+    svg_bar_chart('Advanced Patterns (100k persons)',
+                  [d[0] for d in ap_data], [d[1] for d in ap_data],
+                  [d[2] for d in ap_data],
+                  filename=os.path.join(out_dir, '09_advanced_patterns.svg'))
+
     print(f'\nAll charts generated in {out_dir}/')
 
 
