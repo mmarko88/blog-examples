@@ -1,67 +1,73 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="800" height="784" font-family="Segoe UI, Arial, sans-serif">
-<rect width="800" height="784" fill="white"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="852" font-family="Segoe UI, Arial, sans-serif">
+<rect width="800" height="852" fill="white"/>
 <text x="400" y="30" text-anchor="middle" font-size="16" font-weight="bold">All Strategies Ranked — 100k Persons (avg ms)</text>
 <text x="272" y="69" text-anchor="end" font-size="12">Parallel Bulk API 4t</text>
-<rect x="280" y="50" width="35" height="28" fill="#2196F3" rx="3"/>
-<text x="320" y="69" font-size="12" fill="#333">330 ms</text>
+<rect x="280" y="50" width="31" height="28" fill="#2196F3" rx="3"/>
+<text x="316" y="69" font-size="12" fill="#333">330 ms</text>
 <text x="272" y="103" text-anchor="end" font-size="12">Multi-value 400 + 8t</text>
-<rect x="280" y="84" width="40" height="28" fill="#4CAF50" rx="3"/>
-<text x="325" y="103" font-size="12" fill="#333">368 ms</text>
+<rect x="280" y="84" width="34" height="28" fill="#4CAF50" rx="3"/>
+<text x="319" y="103" font-size="12" fill="#333">368 ms</text>
 <text x="272" y="137" text-anchor="end" font-size="12">Multi-value 400 + 4t</text>
-<rect x="280" y="118" width="46" height="28" fill="#4CAF50" rx="3"/>
-<text x="331" y="137" font-size="12" fill="#333">426 ms</text>
+<rect x="280" y="118" width="40" height="28" fill="#4CAF50" rx="3"/>
+<text x="325" y="137" font-size="12" fill="#333">426 ms</text>
 <text x="272" y="171" text-anchor="end" font-size="12">Parallel Bulk API 8t</text>
-<rect x="280" y="152" width="47" height="28" fill="#2196F3" rx="3"/>
-<text x="332" y="171" font-size="12" fill="#333">434 ms</text>
+<rect x="280" y="152" width="41" height="28" fill="#2196F3" rx="3"/>
+<text x="326" y="171" font-size="12" fill="#333">434 ms</text>
 <text x="272" y="205" text-anchor="end" font-size="12">Bulk API</text>
-<rect x="280" y="186" width="53" height="28" fill="#2196F3" rx="3"/>
-<text x="338" y="205" font-size="12" fill="#333">492 ms</text>
+<rect x="280" y="186" width="46" height="28" fill="#2196F3" rx="3"/>
+<text x="331" y="205" font-size="12" fill="#333">492 ms</text>
 <text x="272" y="239" text-anchor="end" font-size="12">Parallel JdbcTemplate 16t</text>
-<rect x="280" y="220" width="66" height="28" fill="#9C27B0" rx="3"/>
-<text x="351" y="239" font-size="12" fill="#333">608 ms</text>
+<rect x="280" y="220" width="57" height="28" fill="#9C27B0" rx="3"/>
+<text x="342" y="239" font-size="12" fill="#333">608 ms</text>
 <text x="272" y="273" text-anchor="end" font-size="12">Parallel JdbcTemplate 4t + bulkCopy</text>
-<rect x="280" y="254" width="79" height="28" fill="#9C27B0" rx="3"/>
-<text x="364" y="273" font-size="12" fill="#333">731 ms</text>
+<rect x="280" y="254" width="69" height="28" fill="#9C27B0" rx="3"/>
+<text x="354" y="273" font-size="12" fill="#333">731 ms</text>
 <text x="272" y="307" text-anchor="end" font-size="12">TVP (batch=5000)</text>
-<rect x="280" y="288" width="88" height="28" fill="#FF9800" rx="3"/>
-<text x="373" y="307" font-size="12" fill="#333">818 ms</text>
+<rect x="280" y="288" width="77" height="28" fill="#FF9800" rx="3"/>
+<text x="362" y="307" font-size="12" fill="#333">818 ms</text>
 <text x="272" y="341" text-anchor="end" font-size="12">Multi-value 200 (single)</text>
-<rect x="280" y="322" width="90" height="28" fill="#4CAF50" rx="3"/>
-<text x="375" y="341" font-size="12" fill="#333">828 ms</text>
+<rect x="280" y="322" width="78" height="28" fill="#4CAF50" rx="3"/>
+<text x="363" y="341" font-size="12" fill="#333">828 ms</text>
 <text x="272" y="375" text-anchor="end" font-size="12">BCP utility</text>
-<rect x="280" y="356" width="91" height="28" fill="#FFC107" rx="3"/>
-<text x="376" y="375" font-size="12" fill="#333">843 ms</text>
+<rect x="280" y="356" width="79" height="28" fill="#FFC107" rx="3"/>
+<text x="364" y="375" font-size="12" fill="#333">843 ms</text>
 <text x="272" y="409" text-anchor="end" font-size="12">StatelessSession + bulkCopy</text>
-<rect x="280" y="390" width="116" height="28" fill="#00BCD4" rx="3"/>
-<text x="401" y="409" font-size="12" fill="#333">1075 ms</text>
+<rect x="280" y="390" width="101" height="28" fill="#00BCD4" rx="3"/>
+<text x="386" y="409" font-size="12" fill="#333">1075 ms</text>
 <text x="272" y="443" text-anchor="end" font-size="12">JdbcTemplate + bulkCopy</text>
-<rect x="280" y="424" width="149" height="28" fill="#9C27B0" rx="3"/>
-<text x="434" y="443" font-size="12" fill="#333">1373 ms</text>
+<rect x="280" y="424" width="129" height="28" fill="#9C27B0" rx="3"/>
+<text x="414" y="443" font-size="12" fill="#333">1373 ms</text>
 <text x="272" y="477" text-anchor="end" font-size="12">Plain JDBC + bulkCopy</text>
-<rect x="280" y="458" width="164" height="28" fill="#795548" rx="3"/>
-<text x="449" y="477" font-size="12" fill="#333">1516 ms</text>
+<rect x="280" y="458" width="143" height="28" fill="#795548" rx="3"/>
+<text x="428" y="477" font-size="12" fill="#333">1516 ms</text>
 <text x="272" y="511" text-anchor="end" font-size="12">Hibernate + bulkCopy</text>
-<rect x="280" y="492" width="233" height="28" fill="#F44336" rx="3"/>
-<text x="518" y="511" font-size="12" fill="#333">2144 ms</text>
+<rect x="280" y="492" width="202" height="28" fill="#F44336" rx="3"/>
+<text x="487" y="511" font-size="12" fill="#333">2144 ms</text>
 <text x="272" y="545" text-anchor="end" font-size="12">Clustered + TABLOCK</text>
-<rect x="280" y="526" width="237" height="28" fill="#3F51B5" rx="3"/>
-<text x="522" y="545" font-size="12" fill="#333">2185 ms</text>
+<rect x="280" y="526" width="206" height="28" fill="#3F51B5" rx="3"/>
+<text x="491" y="545" font-size="12" fill="#333">2185 ms</text>
 <text x="272" y="579" text-anchor="end" font-size="12">JDBC PreparedStatement</text>
-<rect x="280" y="560" width="263" height="28" fill="#607D8B" rx="3"/>
-<text x="548" y="579" font-size="12" fill="#333">2423 ms</text>
+<rect x="280" y="560" width="229" height="28" fill="#607D8B" rx="3"/>
+<text x="514" y="579" font-size="12" fill="#333">2423 ms</text>
 <text x="272" y="613" text-anchor="end" font-size="12">StatelessSession</text>
-<rect x="280" y="594" width="288" height="28" fill="#00BCD4" rx="3"/>
-<text x="573" y="613" font-size="12" fill="#333">2650 ms</text>
+<rect x="280" y="594" width="250" height="28" fill="#00BCD4" rx="3"/>
+<text x="535" y="613" font-size="12" fill="#333">2650 ms</text>
 <text x="272" y="647" text-anchor="end" font-size="12">JdbcTemplate</text>
-<rect x="280" y="628" width="324" height="28" fill="#9C27B0" rx="3"/>
-<text x="609" y="647" font-size="12" fill="#333">2985 ms</text>
+<rect x="280" y="628" width="282" height="28" fill="#9C27B0" rx="3"/>
+<text x="567" y="647" font-size="12" fill="#333">2985 ms</text>
 <text x="272" y="681" text-anchor="end" font-size="12">Persistable saveAll</text>
-<rect x="280" y="662" width="372" height="28" fill="#E91E63" rx="3"/>
-<text x="657" y="681" font-size="12" fill="#333">3426 ms</text>
-<text x="272" y="715" text-anchor="end" font-size="12">Plain JDBC</text>
-<rect x="280" y="696" width="424" height="28" fill="#795548" rx="3"/>
-<text x="709" y="715" font-size="12" fill="#333">3905 ms</text>
-<text x="272" y="749" text-anchor="end" font-size="12">Hibernate persist</text>
-<rect x="280" y="730" width="440" height="28" fill="#F44336" rx="3"/>
-<text x="725" y="749" font-size="12" fill="#333">4048 ms</text>
+<rect x="280" y="662" width="324" height="28" fill="#E91E63" rx="3"/>
+<text x="609" y="681" font-size="12" fill="#333">3426 ms</text>
+<text x="272" y="715" text-anchor="end" font-size="12">SWITCH partition pattern</text>
+<rect x="280" y="696" width="328" height="28" fill="#607D8B" rx="3"/>
+<text x="613" y="715" font-size="12" fill="#333">3470 ms</text>
+<text x="272" y="749" text-anchor="end" font-size="12">Plain JDBC</text>
+<rect x="280" y="730" width="369" height="28" fill="#795548" rx="3"/>
+<text x="654" y="749" font-size="12" fill="#333">3905 ms</text>
+<text x="272" y="783" text-anchor="end" font-size="12">Hibernate persist</text>
+<rect x="280" y="764" width="382" height="28" fill="#F44336" rx="3"/>
+<text x="667" y="783" font-size="12" fill="#333">4048 ms</text>
+<text x="272" y="817" text-anchor="end" font-size="12">Partitioned direct insert</text>
+<rect x="280" y="798" width="440" height="28" fill="#607D8B" rx="3"/>
+<text x="725" y="817" font-size="12" fill="#333">4652 ms</text>
 </svg>

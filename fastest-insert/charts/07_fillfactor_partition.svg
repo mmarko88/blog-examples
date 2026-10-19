@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="274" font-family="Segoe UI, Arial, sans-serif">
+<rect width="800" height="274" fill="white"/>
+<text x="400" y="30" text-anchor="middle" font-size="16" font-weight="bold">Fill Factor & Partitioning (100k persons)</text>
+<text x="272" y="69" text-anchor="end" font-size="12">Fill factor 50 (Bulk)</text>
+<rect x="280" y="50" width="166" height="28" fill="#F44336" rx="3"/>
+<text x="451" y="69" font-size="12" fill="#333">1762 ms</text>
+<text x="272" y="103" text-anchor="end" font-size="12">Fill factor 70 (Bulk)</text>
+<rect x="280" y="84" width="113" height="28" fill="#FF9800" rx="3"/>
+<text x="398" y="103" font-size="12" fill="#333">1199 ms</text>
+<text x="272" y="137" text-anchor="end" font-size="12">Fill factor 90 (Bulk)</text>
+<rect x="280" y="118" width="82" height="28" fill="#4CAF50" rx="3"/>
+<text x="367" y="137" font-size="12" fill="#333">869 ms</text>
+<text x="272" y="171" text-anchor="end" font-size="12">Fill factor 100 (Bulk)</text>
+<rect x="280" y="152" width="86" height="28" fill="#2196F3" rx="3"/>
+<text x="371" y="171" font-size="12" fill="#333">916 ms</text>
+<text x="272" y="205" text-anchor="end" font-size="12">Partitioned direct insert</text>
+<rect x="280" y="186" width="440" height="28" fill="#9C27B0" rx="3"/>
+<text x="725" y="205" font-size="12" fill="#333">4652 ms</text>
+<text x="272" y="239" text-anchor="end" font-size="12">SWITCH partition pattern</text>
+<rect x="280" y="220" width="328" height="28" fill="#00BCD4" rx="3"/>
+<text x="613" y="239" font-size="12" fill="#333">3470 ms</text>
+</svg>

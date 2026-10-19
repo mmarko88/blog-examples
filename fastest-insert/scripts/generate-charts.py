@@ -140,9 +140,11 @@ def main():
         ('JDBC PreparedStatement', 2423),
         ('StatelessSession', 2650),
         ('JdbcTemplate', 2985),
+        ('SWITCH partition pattern', 3470),
         ('Persistable saveAll', 3426),
         ('Plain JDBC', 3905),
         ('Hibernate persist', 4048),
+        ('Partitioned direct insert', 4652),
     ]
     ranking.sort(key=lambda x: x[1])
     labels = [r[0] for r in ranking]
@@ -243,6 +245,40 @@ def main():
                   [d[0] for d in row_data], [d[1] for d in row_data],
                   [d[2] for d in row_data],
                   filename=os.path.join(out_dir, '06_row_compression.svg'))
+
+    # ---- Chart 7: Fill factor + partitioning ----
+    print('Chart 7: Fill Factor & Partitioning')
+    ff_data = [
+        ('Fill factor 50 (Bulk)', 1762, '#F44336'),
+        ('Fill factor 70 (Bulk)', 1199, '#FF9800'),
+        ('Fill factor 90 (Bulk)', 869, '#4CAF50'),
+        ('Fill factor 100 (Bulk)', 916, '#2196F3'),
+        ('Partitioned direct insert', 4652, '#9C27B0'),
+        ('SWITCH partition pattern', 3470, '#00BCD4'),
+    ]
+    svg_bar_chart('Fill Factor & Partitioning (100k persons)',
+                  [d[0] for d in ff_data], [d[1] for d in ff_data],
+                  [d[2] for d in ff_data],
+                  filename=os.path.join(out_dir, '07_fillfactor_partition.svg'))
+
+    # ---- Chart 8: Transaction + GC ----
+    print('Chart 8: Transaction Patterns & GC')
+    tx_data = [
+        ('Commit per batch', 3543, '#4CAF50'),
+        ('One large txn', 3773, '#2196F3'),
+        ('Savepoints per batch', 3949, '#FF9800'),
+        ('Serializable isolation', 2963, '#9C27B0'),
+        ('Read committed', 3037, '#9C27B0'),
+        ('Read uncommitted', 3189, '#9C27B0'),
+        ('G1 512m (JDBC)', 3194, '#00BCD4'),
+        ('G1 4g (JDBC)', 3095, '#00BCD4'),
+        ('Parallel 2g (JDBC)', 3401, '#00BCD4'),
+        ('ZGC 4g (JDBC)', 3291, '#00BCD4'),
+    ]
+    svg_bar_chart('Transaction & GC Tuning (100k persons)',
+                  [d[0] for d in tx_data], [d[1] for d in tx_data],
+                  [d[2] for d in tx_data],
+                  filename=os.path.join(out_dir, '08_transaction_gc.svg'))
 
     print(f'\nAll charts generated in {out_dir}/')
 
