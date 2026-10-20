@@ -1,5 +1,7 @@
 # Fastest Way to Insert Data in MS SQL — Code Examples
 
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/mmarko88/blog-examples?quickstart=1)
+
 Multi-module Maven project with code examples for the 8-part blog series on [professionaldev.dev](https://www.professionaldev.dev/).
 
 ## Blog Series
