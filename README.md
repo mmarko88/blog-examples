@@ -1,5 +1,7 @@
 # Blog Post Code Examples
 
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/mmarko88/blog-examples?quickstart=1)
+
 Runnable code examples referenced by posts on [professionaldev.dev](https://www.professionaldev.dev/).
 
 | Directory | Post(s) | Stack |
