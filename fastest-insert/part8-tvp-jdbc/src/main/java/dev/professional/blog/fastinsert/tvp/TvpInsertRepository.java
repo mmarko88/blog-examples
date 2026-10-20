@@ -7,6 +7,18 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 
+/**
+ * Inserts persons via SQL Server Table-Valued Parameters (TVP) — sends an entire batch as a
+ * single {@link SQLServerDataTable} parameter through a stored procedure call.
+ *
+ * <p>Blog post: Part 8 — TVP, JDBC, Final Ranking. TVP at batch size 5,000 averages 818 ms
+ * for 100k rows — the best portable option (works with any JDBC driver that supports
+ * {@link CallableStatement}).</p>
+ *
+ * <p>The stored procedure and the {@code PersonTableType} user-defined table type are
+ * auto-created if missing on first run.</p>
+ */
+
 import javax.sql.DataSource;
 import java.sql.*;
 import java.util.List;

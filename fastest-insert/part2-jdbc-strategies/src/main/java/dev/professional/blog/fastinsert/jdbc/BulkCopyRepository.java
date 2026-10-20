@@ -12,6 +12,21 @@ import jakarta.transaction.Transactional;
 import org.hibernate.Session;
 import org.springframework.stereotype.Service;
 
+/**
+ * Inserts persons via the SQL Server {@link SQLServerBulkCopy} API — the TDS bulk-insert
+ * protocol that bypasses standard INSERT parsing entirely.
+ *
+ * <p>Blog post: Part 2 — JDBC Strategies. This is the single-thread baseline that Parts 4–6
+ * build on (useBulkCopyForBatchInsert flag, parallel threads).</p>
+ *
+ * <p>The implementation unwraps the Hibernate-managed JDBC connection via
+ * {@code Session.doWork()}, populates a {@link javax.sql.rowset.CachedRowSet} with column
+ * metadata from {@link TableDescriptor}, and writes it through
+ * {@link SQLServerBulkCopy#writeToServer}.</p>
+ *
+ * @see dev.professional.blog.fastinsert.parallel.ParallelInsertExecutor for multi-threaded version
+ */
+
 import javax.sql.RowSetMetaData;
 import javax.sql.rowset.CachedRowSet;
 import javax.sql.rowset.RowSetMetaDataImpl;

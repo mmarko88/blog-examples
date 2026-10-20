@@ -103,6 +103,33 @@ CREATE TYPE dbo.PersonTableType AS TABLE (
 );
 ```
 
+## Test Class Guide
+
+Each test class in `benchmarks/src/test/java/` maps to one or more blog parts. Run any single class with `mvn test -pl benchmarks -Dtest="ClassName"`.
+
+| Test class | Blog part | What it benchmarks |
+|-----------|-----------|-------------------|
+| `FastestInsertApplicationTests` | 1–5, 8 | Core strategies: Hibernate, JdbcTemplate, Bulk API, TVP, StatelessSession, Persistable, multi-value |
+| `AdvancedBenchmarkTests` | 6–7 | Thread sweep (1–16), index count sweep (0–5) |
+| `ExtendedBenchmarkTests` | 4–8 | 1M rows, 16 threads, useBulkCopyForBatchInsert=true across all strategies |
+| `ExperimentalBenchmarkTests` | 5 | Batch-size sweep (100–10,000), multi-value objectsPerInsert sweep |
+| `MultiValueParallelTests` | 3, 6 | Multi-value INSERT combined with parallel threads |
+| `CombinedWinnerTests` | 8 | Combined top strategies head-to-head |
+| `OptimizationSweepTests` | 8 | Strategy matrix sweep across batch sizes and thread counts |
+| `FillFactorAndPartitionTests` | 7 | Fill factor (50/70/90/100), partition + SWITCH pattern |
+| `AdvancedExperimentTests` | 5, 7 | Transaction patterns, isolation levels, GC tuning |
+| `AdvancedPatternTests` | 8 | RCSI, MERGE vs INSERT, triggers, async pipeline |
+| `StoragePatternTests` | 7 | Change tracking, temporal tables, GUID keys |
+| `ColumnTypeAndStatsTests` | 7 | XML/JSON columns, sparse, AUTO_UPDATE_STATISTICS, encryption |
+| `IndexAndLoggingTests` | 7 | Index varieties (filtered, INCLUDE, composite), computed columns, trace flag 610, delayed durability |
+| `IdentityAndFkTests` | 7 | ID generation strategies (IDENTITY, SEQUENCE, app-generated), foreign keys, batch retry |
+| `PlanAndBulkOptionsTests` | 8 | OPTION(RECOMPILE), simulated latency, INSERT…SELECT, SQLServerBulkCopy options |
+| `InMemoryAndBulkTests` | 8 | In-Memory OLTP, BULK INSERT from file, stored procedures, check constraints |
+| `SnapshotAndSwitchTests` | 8 | SNAPSHOT isolation + concurrent readers, SWITCH with indexes |
+| `XmlJsonAndSpillTests` | 8 | XML/JSON index overhead, tempdb spill under memory pressure |
+| `PoolAndTuningTests` | 5 | Connection pool tuning, sendStringParametersAsUnicode |
+| `GcTuningTests` | 5 | GC comparison: G1 vs Parallel vs ZGC, heap sizes |
+
 ## Package
 
 All classes use the `dev.professional.blog.fastinsert` package namespace.

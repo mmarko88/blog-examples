@@ -24,6 +24,31 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
+ * Facade over every insert strategy benchmarked in the
+ * <a href="https://www.professionaldev.dev/series/fastest-way-to-insert-data-in-ms-sql/">Fastest MS SQL Inserts</a> series.
+ *
+ * <p>Each {@code insertXxx} method delegates to one specific repository/strategy.
+ * The benchmark test classes call these methods, wrap them in a timed loop, and persist
+ * the results via {@link TestResultService}.</p>
+ *
+ * <p>Strategy catalogue:</p>
+ * <ul>
+ *   <li><b>Hibernate</b>: {@code insertHibernate} (Part 1)</li>
+ *   <li><b>SaveAll</b>: {@code insertSaveAll}, {@code insertPersistableSaveAll} (Parts 1, 5)</li>
+ *   <li><b>StatelessSession</b>: {@code insertStatelessSession} (Part 5)</li>
+ *   <li><b>JdbcTemplate</b>: {@code insertJdbcTemplate} (Part 2)</li>
+ *   <li><b>JDBC PreparedStatement</b>: {@code insertJdbc} (Part 2)</li>
+ *   <li><b>Bulk Copy API</b>: {@code insertBulkApi} (Part 2)</li>
+ *   <li><b>Parallel Bulk API</b>: {@code insertParallel*} (Part 6)</li>
+ *   <li><b>TVP</b>: {@code insertTvp} (Part 8)</li>
+ *   <li><b>Plain JDBC</b>: {@code insertPlainJdbc} (Part 8)</li>
+ * </ul>
+ *
+ * @see TestResultService for persisting benchmark timings
+ * @see dev.professional.blog.fastinsert.common.PersonDescriptors for table/column metadata
+ */
+
+/**
  * Orchestrates all insert strategies for benchmarking.
  */
 @Service

@@ -9,6 +9,18 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+/**
+ * Splits a list of {@link Person} entities across N threads, each inserting via its own JDBC
+ * connection. Works with Bulk Copy API, JdbcTemplate, or any insert strategy passed as a
+ * {@code BiConsumer<List<Person>, Integer>}.
+ *
+ * <p>Blog post: Part 6 — Parallel Threads. Key finding: 4–8 threads is the sweet spot;
+ * beyond that, lock contention on SQL Server flattens the curve.</p>
+ *
+ * @see dev.professional.blog.fastinsert.jdbc.BulkCopyRepository
+ * @see dev.professional.blog.fastinsert.jdbc.SpringTemplateBulkInsertRepository
+ */
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
