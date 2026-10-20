@@ -70,9 +70,66 @@ fastest-insert/
 
 ## Prerequisites
 
-- **Java 17+**
-- **MS SQL Server** with a `testdb` database
-- **Maven 3.9+**
+### Required software
+
+| Tool | Minimum version | Tested with |
+|------|----------------|-------------|
+| **Java (JDK)** | 17 | Eclipse Adoptium 17.0.16 |
+| **Maven** | 3.9+ | 3.9.9 |
+| **MS SQL Server** | 2019+ (any edition) | SQL Server 2025 Express (RTM 17.0.1000.7) |
+
+SQL Server Express is free and sufficient for all benchmarks. Developer Edition also works. The
+key SQL features used (Bulk Copy, TVP, In-Memory OLTP, partitioning) are available in all
+editions since SQL Server 2016 SP1.
+
+### Database setup
+
+```sql
+-- Create the test database (one-time)
+CREATE DATABASE testdb;
+-- The application creates the person table automatically (Hibernate ddl-auto=update)
+```
+
+Default connection: `localhost:1433`, login `weblogic`/`weblogic` (edit
+`benchmarks/src/main/resources/application.properties` to change).
+
+### Environment recommendations for reliable benchmarks
+
+These are the conditions under which the published numbers were measured. Your results will
+differ; what matters is the *relative* ranking between strategies on *your* hardware.
+
+**Hardware:**
+- **CPU:** 4+ cores. Parallel benchmarks (Part 6) need real cores, not hyperthreads.
+- **RAM:** 8 GB minimum. SQL Server Express uses up to 1.4 GB; the JVM needs 512 MB–4 GB
+  depending on the GC test.
+- **Disk:** SSD strongly preferred. Spinning disk dominates the numbers and hides the
+  strategy-vs-strategy delta.
+- **Network:** localhost (no network hop). Any latency between the JVM and SQL Server changes
+  the relative ranking (see Part 8's simulated-latency experiment).
+
+**Operating system:**
+- Windows 10/11 or Windows Server 2019+ (SQL Server native).
+- Linux works via Docker or SQL Server on Linux; expect minor differences in I/O scheduling.
+- macOS: use Docker for SQL Server (`mcr.microsoft.com/mssql/server:2022-latest`).
+
+**What to close before running:**
+- Other database connections (SSMS query windows, monitoring tools).
+- Background processes that write to disk (Windows Update, antivirus scans, IDE indexing).
+- Docker Desktop if SQL Server is running natively (and vice versa).
+
+**JVM flags (set automatically by Maven Surefire):**
+- `-Xmx1g` for most tests; GC tests explicitly override to `-Xmx512m` / `-Xmx4g`.
+- `-Duser.timezone=UTC -Dfile.encoding=UTF-8` for deterministic string handling.
+
+**SQL Server configuration tips:**
+- Set `tempdb` on a separate drive from `testdb` if possible (reduces I/O contention on
+  spill-heavy tests like Part 8's tempdb experiment).
+- Leave `AUTO_UPDATE_STATISTICS ON` (the default). Turning it off makes inserts **slower**
+  (measured in Part 7).
+- Leave `MAXDOP` at default unless you're testing parallelism specifically.
+
+**Warm-up:** each test class runs a 1-run warm-up before the timed runs. The published numbers
+are the **median of 10 timed runs** per strategy.
 
 ## Running
 
