@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+# mssql — start/stop SQL Server on demand. Stays OFF by default:
+# `off` also disables boot autostart; `on` starts for this session only.
+#
+#   mssql on       start sqlservr
+#   mssql off      stop sqlservr + disable autostart
+#   mssql status   show state
+set -u
+SVC=mssql-server.service
+
+case "${1:-status}" in
+  on)
+    [[ $EUID -ne 0 ]] && exec sudo "$0" "$@"
+    systemctl start "$SVC" && echo "started. Connect: sqlcmd -S localhost -U sa" ;;
+  off)
+    [[ $EUID -ne 0 ]] && exec sudo "$0" "$@"
+    systemctl disable --now "$SVC" && echo "stopped + autostart disabled" ;;
+  status)
+    echo "active:   $(systemctl is-active $SVC)"
+    echo "enabled:  $(systemctl is-enabled $SVC 2>&1)"
+    ss -tln | grep -q ':1433 ' && echo "port 1433: listening" || echo "port 1433: closed" ;;
+  *) echo "usage: mssql [on|off|status]"; exit 1 ;;
+esac

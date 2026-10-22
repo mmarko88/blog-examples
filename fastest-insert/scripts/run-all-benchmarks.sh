@@ -4,10 +4,10 @@
 # Requires SQL Server running on localhost:1433 with testdb + weblogic user.
 #
 # Usage:
-#   ./run-all-benchmarks.sh              # run all 3 suites
-#   ./run-all-benchmarks.sh --core       # only core benchmarks (~56 min)
-#   ./run-all-benchmarks.sh --advanced   # only thread/index sweep (~14 min)
-#   ./run-all-benchmarks.sh --extended   # only 16-thread/1M/bulkCopy (~7 min)
+#   ./run-all-benchmarks.sh              # run all suites
+#   ./run-all-benchmarks.sh --core       # per-part suites, all modules (~56 min)
+#   ./run-all-benchmarks.sh --advanced   # Parts 6-7 only (~14 min)
+#   ./run-all-benchmarks.sh --extended   # 16-thread/1M/bulkCopy (~7 min)
 
 set -euo pipefail
 cd "$(dirname "$0")/.."
@@ -24,28 +24,35 @@ echo "[Build] Done."
 echo ""
 
 run_suite() {
-    local name=$1 class=$2 est=$3
+    local name=$1 shift
+    local est=$1 shift
     echo "================================================================"
     echo "[Suite] $name (estimated: $est)"
     echo "================================================================"
-    mvn test -pl benchmarks -Dtest="$class" -Dsurefire.useFile=false
+    mvn test -Dsurefire.useFile=false "$@"
     echo ""
 }
 
 case "${1:-all}" in
     --core)
-        run_suite "Core Benchmarks (Parts 1-5, 8)" "FastestInsertApplicationTests" "~56 min"
+        # Per-part tests across all part modules (Parts 1-8)
+        run_suite "Core Benchmarks — all parts" "~56 min" \
+            -pl 'part1-hibernate-batching,part2-jdbc-strategies,part3-multivalue-insert,part4-bulk-copy-parameter,part5-hibernate-tuning,part6-parallel-inserts,part7-index-impact,part8-tvp-jdbc'
         ;;
     --advanced)
-        run_suite "Thread + Index Sweep (Parts 6-7)" "AdvancedBenchmarkTests" "~14 min"
+        # Thread sweep (part6) + index sweep (part7)
+        run_suite "Thread + Index Sweep (Parts 6-7)" "~14 min" \
+            -pl part6-parallel-inserts,part7-index-impact
         ;;
     --extended)
-        run_suite "16-Thread, 1M Dataset, BulkCopy=true" "ExtendedBenchmarkTests" "~7 min"
+        run_suite "16-Thread, 1M Dataset, BulkCopy=true" "~7 min" \
+            -pl benchmarks -Dtest="ExtendedBenchmarkTests"
         ;;
     all|*)
-        run_suite "Core Benchmarks (Parts 1-5, 8)" "FastestInsertApplicationTests" "~56 min"
-        run_suite "Thread + Index Sweep (Parts 6-7)" "AdvancedBenchmarkTests" "~14 min"
-        run_suite "16-Thread, 1M Dataset, BulkCopy=true" "ExtendedBenchmarkTests" "~7 min"
+        run_suite "Core Benchmarks — all parts" "~56 min" \
+            -pl 'part1-hibernate-batching,part2-jdbc-strategies,part3-multivalue-insert,part4-bulk-copy-parameter,part5-hibernate-tuning,part6-parallel-inserts,part7-index-impact,part8-tvp-jdbc'
+        run_suite "16-Thread, 1M Dataset, BulkCopy=true" "~7 min" \
+            -pl benchmarks -Dtest="ExtendedBenchmarkTests"
         ;;
 esac
 

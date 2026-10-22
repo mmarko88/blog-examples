@@ -30,8 +30,13 @@ fastest-insert/
   part6-parallel-inserts/       ParallelInsertExecutor (1-16 threads)
   part7-index-impact/           IndexBenchmarkHelper (create/drop 0-5 indexes)
   part8-tvp-jdbc/               TVP (SQLServerDataTable), plain JDBC batch insert
-  benchmarks/                   Spring Boot app + 3 benchmark test suites
+  test-support/                 Shared test infra: Spring Boot app, MultipleRunner,
+                                AbstractBenchmarkTest base, DB config
+  benchmarks/                   FastInsertService facade + cross-part/experimental suites
 ```
+
+Each `partN` module owns its benchmark test (`src/test/.../PartN*Tests.java`), so
+`mvn test -pl part1-hibernate-batching` runs just Part 1.
 
 ## Benchmark Results (100,000 persons, batch=1000)
 
@@ -84,7 +89,23 @@ SQL Server Express is free and sufficient for all benchmarks. Developer Edition 
 key SQL features used (Bulk Copy, TVP, In-Memory OLTP, partitioning) are available in all
 editions since SQL Server 2016 SP1.
 
+> **No-root toolchain:** JDK and Maven don't need sudo. Extract a
+> [Temurin](https://adoptium.net/) JDK tarball and the
+> [Maven binary](https://maven.apache.org/download.cgi) to `~/opt/` and add their `bin/`
+> dirs to `PATH` (plus `JAVA_HOME`). See `scripts/README.md` for the exact layout used
+> during development (multiple JDKs under `~/opt/jdk-<ver>` with a `setjava` switcher).
+
 ### Database setup
+
+Pick one of the two setup scripts — both create `testdb`, the `weblogic`/`weblogic`
+login (db_owner), and the `PersonTableType` TVP:
+
+```bash
+./scripts/setup-linux.sh          # Docker container (any OS with Docker)
+sudo ./scripts/setup-mssql-native.sh   # native SQL Server on Ubuntu/Debian, no Docker
+```
+
+Or manually:
 
 ```sql
 -- Create the test database (one-time)
@@ -93,7 +114,12 @@ CREATE DATABASE testdb;
 ```
 
 Default connection: `localhost:1433`, login `weblogic`/`weblogic` (edit
-`benchmarks/src/main/resources/application.properties` to change).
+`test-support/src/main/resources/application.properties` to change — it's the
+shared config every module's tests pick up).
+
+> **sqlcmd 18+ note:** the ODBC driver defaults to mandatory encryption and rejects
+> SQL Server's self-signed cert. Always pass `-C` (trust server certificate):
+> `sqlcmd -S localhost -U weblogic -P weblogic -C -d testdb`.
 
 ### Environment recommendations for reliable benchmarks
 
@@ -119,6 +145,12 @@ differ; what matters is the *relative* ranking between strategies on *your* hard
 - Background processes that write to disk (Windows Update, antivirus scans, IDE indexing).
 - Docker Desktop if SQL Server is running natively (and vice versa).
 
+**Linux quick-quiet:** `scripts/bench-env.sh` automates this — `check` audits running
+services, `sudo scripts/bench-env.sh on` turns on benchmark mode (stops non-essential
+services, locks the CPU at a fixed frequency), `on --desktop` additionally drops to
+`multi-user.target` (runlevel 3, kills the GUI), and `off` restores everything.
+See `scripts/README.md` for details.
+
 **JVM flags (set automatically by Maven Surefire):**
 - `-Xmx1g` for most tests; GC tests explicitly override to `-Xmx512m` / `-Xmx4g`.
 - `-Duser.timezone=UTC -Dfile.encoding=UTF-8` for deterministic string handling.
@@ -136,20 +168,34 @@ are the **median of 10 timed runs** per strategy.
 ## Running
 
 ```bash
-# Build all modules (no DB required)
+# Build all modules (no DB required) — run from the project ROOT so the
+# reactor builds `common` before the modules that depend on it
 mvn clean install -DskipTests
 
 # Run benchmarks (requires MS SQL Server on localhost:1433)
-# Edit benchmarks/src/main/resources/application.properties with your DB credentials first
+# Edit test-support/src/main/resources/application.properties with your DB credentials first
 
-# Run core benchmarks (Parts 1-5, 8 — ~56 min)
-mvn test -pl benchmarks -Dtest="FastestInsertApplicationTests"
+# Run one part (~per-module feedback loop)
+mvn test -pl part1-hibernate-batching
+mvn test -pl part6-parallel-inserts
 
-# Run thread + index sweep (Part 6-7 — ~14 min)
-mvn test -pl benchmarks -Dtest="AdvancedBenchmarkTests"
+# Run core benchmarks — all parts (~56 min)
+mvn test -pl 'part1-hibernate-batching,part2-jdbc-strategies,part3-multivalue-insert,part4-bulk-copy-parameter,part5-hibernate-tuning,part6-parallel-inserts,part7-index-impact,part8-tvp-jdbc'
+
+# Run thread + index sweep (Parts 6-7 — ~14 min)
+mvn test -pl part6-parallel-inserts,part7-index-impact
 
 # Run 16-thread, 1M, useBulkCopy=true (Parts 4-8 — ~7 min)
 mvn test -pl benchmarks -Dtest="ExtendedBenchmarkTests"
+```
+
+Or use the convenience runner — per-part modules, individual suites, or all at once:
+
+```bash
+./scripts/run-benchmark.sh list        # parts + all experimental suites
+./scripts/run-benchmark.sh 1           # Part 1 only (or ./run-benchmark.sh part1)
+./scripts/run-benchmark.sh gc          # single suite (fuzzy match → GcTuningTests)
+./scripts/run-benchmark.sh all         # every module + suite, with pass/fail summary
 ```
 
 ### TVP setup
@@ -164,12 +210,25 @@ CREATE TYPE dbo.PersonTableType AS TABLE (
 
 ## Test Class Guide
 
-Each test class in `benchmarks/src/test/java/` maps to one or more blog parts. Run any single class with `mvn test -pl benchmarks -Dtest="ClassName"`.
+Per-part tests live inside their own module — run one with
+`mvn test -pl <module>` (whole module) or `-Dtest="ClassName"` (single class):
+
+| Test class | Module | Blog part | What it benchmarks |
+|-----------|--------|-----------|-------------------|
+| `Part1HibernateBatchingTests` | part1 | 1 | Hibernate persist-and-flush vs saveAll |
+| `Part2JdbcStrategyTests` | part2 | 2 | PreparedStatement, JdbcTemplate, Bulk Copy API |
+| `Part3MultiValueTests` | part3 | 3 | Multi-value INSERT (objectsPerInsert > 1) |
+| `Part4BulkCopyParameterTests` | part4 | 4 | Part 1/2 inserts with useBulkCopyForBatchInsert=true |
+| `Part5HibernateTuningTests` | part5 | 5 | StatelessSession, Persistable saveAll |
+| `Part6ParallelInsertTests` | part6 | 6 | 4-thread benchmark + 1/2/4/8 thread sweep |
+| `Part7IndexImpactTests` | part7 | 7 | 0/1/3/5 indexes × 3 strategies |
+| `Part8TvpJdbcTests` | part8 | 8 | TVP + plain PreparedStatement JDBC |
+
+Cross-part and experimental suites live in `benchmarks/src/test/java/`. Run any
+single class with `mvn test -pl benchmarks -Dtest="ClassName"`.
 
 | Test class | Blog part | What it benchmarks |
 |-----------|-----------|-------------------|
-| `FastestInsertApplicationTests` | 1–5, 8 | Core strategies: Hibernate, JdbcTemplate, Bulk API, TVP, StatelessSession, Persistable, multi-value |
-| `AdvancedBenchmarkTests` | 6–7 | Thread sweep (1–16), index count sweep (0–5) |
 | `ExtendedBenchmarkTests` | 4–8 | 1M rows, 16 threads, useBulkCopyForBatchInsert=true across all strategies |
 | `ExperimentalBenchmarkTests` | 5 | Batch-size sweep (100–10,000), multi-value objectsPerInsert sweep |
 | `MultiValueParallelTests` | 3, 6 | Multi-value INSERT combined with parallel threads |

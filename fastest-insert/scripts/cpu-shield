@@ -1,0 +1,58 @@
+#!/usr/bin/env bash
+# cpu-shield — isolate a core for benchmarks on cgroup v2 (systemd AllowedCPUs).
+#
+#   cpu-shield on [core]     restrict system+user slices off core N (default 3)
+#   cpu-shield off           release — all slices get every core back
+#   cpu-shield status        show current AllowedCPUs
+#   cpu-shield run <cmd...>  run command pinned to the isolated core
+#
+# cgroup v2 native — no cpuset package needed.
+set -u
+CORE_FILE=/var/tmp/cpu-shield.core
+CORE=$(cat "$CORE_FILE" 2>/dev/null || echo 3)
+SLICES="system.slice user.slice init.scope"
+
+need_root() { [[ $EUID -ne 0 ]] && exec sudo "$(readlink -f "$0")" "$@"; }
+
+others() { # all cores except $CORE, comma-separated
+  local max=$(( $(nproc) - 1 )) out=()
+  for i in $(seq 0 "$max"); do [[ $i -ne $CORE ]] && out+=("$i"); done
+  (IFS=,; echo "${out[*]}")
+}
+
+case "${1:-status}" in
+  on)
+    CORE=${2:-3}; need_root "$@"
+    echo "$CORE" > "$CORE_FILE"
+    for s in $SLICES; do
+      systemctl set-property --runtime "$s" "AllowedCPUs=$(others)" >/dev/null
+    done
+    echo "shield ON: everything pinned to cores $(others), core $CORE free for benchmarks"
+    ;;
+  off)
+    need_root "$@"
+    for s in $SLICES; do
+      systemctl set-property --runtime "$s" AllowedCPUs= >/dev/null
+    done
+    echo "shield OFF: all cores back to normal scheduling"
+    ;;
+  status)
+    for s in $SLICES; do
+      echo "$s: AllowedCPUs=$(systemctl show "$s" -p AllowedCPUs --value 2>/dev/null)"
+    done
+    echo "isolated core (used by 'run'): $CORE"
+    ;;
+  run)
+    shift
+    [[ -f $CORE_FILE ]] || { echo "no shield — run 'cpu-shield on' first"; exit 1; }
+    CMD=$(command -v "$1" 2>/dev/null || true)
+    [[ -n $CMD ]] || { echo "not found in PATH: $1"; exit 1; }
+    exec sudo "$(readlink -f "$0")" run-env "$PATH" "${JAVA_HOME:-}" -- "$CMD" "${@:2}"
+    ;;
+  run-env)   # internal: re-exec'd as root by `run` — PATH/JAVA_HOME carried in args
+    EP=$2; EJ=$3; shift 4
+    systemd-run --scope --uid="${SUDO_USER:-$USER}" -p AllowedCPUs="$CORE" \
+      -- env "PATH=$EP" "JAVA_HOME=$EJ" "$@"
+    ;;
+  *) echo "usage: cpu-shield [on [core]|off|status|run <cmd...>]"; exit 1 ;;
+esac
