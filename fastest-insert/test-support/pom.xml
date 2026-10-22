@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>dev.professional.blog</groupId>
+        <artifactId>fastest-insert</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>fastest-insert-test-support</artifactId>
+    <name>Fastest Insert — Test Support</name>
+    <description>
+        Shared benchmark test infrastructure: Spring Boot application, MultipleRunner,
+        TestParam, TestResult persistence, CleanupService, AbstractBenchmarkTest base
+        class, and application.properties. Part modules depend on this (test scope)
+        to run their own benchmark tests.
+    </description>
+
+    <dependencies>
+        <dependency>
+            <groupId>dev.professional.blog</groupId>
+            <artifactId>fastest-insert-common</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+        <!-- Compile scope on purpose: this is a test-support library; consumers
+             get JUnit/AssertJ/spring-test transitively via their test-scope dep. -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+    </dependencies>
+</project>

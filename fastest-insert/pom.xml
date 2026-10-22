@@ -20,6 +20,7 @@
 
     <modules>
         <module>common</module>
+        <module>test-support</module>
         <module>part1-hibernate-batching</module>
         <module>part2-jdbc-strategies</module>
         <module>part3-multivalue-insert</module>
@@ -41,6 +42,11 @@
             <dependency>
                 <groupId>dev.professional.blog</groupId>
                 <artifactId>fastest-insert-common</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>dev.professional.blog</groupId>
+                <artifactId>fastest-insert-test-support</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>

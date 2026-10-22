@@ -20,6 +20,11 @@
             <artifactId>fastest-insert-common</artifactId>
         </dependency>
         <dependency>
+            <groupId>dev.professional.blog</groupId>
+            <artifactId>fastest-insert-test-support</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <optional>true</optional>

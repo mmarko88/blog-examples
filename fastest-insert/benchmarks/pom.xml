@@ -21,6 +21,10 @@
         </dependency>
         <dependency>
             <groupId>dev.professional.blog</groupId>
+            <artifactId>fastest-insert-test-support</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>dev.professional.blog</groupId>
             <artifactId>fastest-insert-part1-hibernate-batching</artifactId>
         </dependency>
         <dependency>
@@ -77,6 +81,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
+                    <mainClass>dev.professional.blog.fastinsert.FastestInsertApplication</mainClass>
                     <excludes>
                         <exclude>
                             <groupId>org.projectlombok</groupId>
