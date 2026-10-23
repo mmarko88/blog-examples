@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+# cpu-mon [interval] — per-core usage% + temp (C), refreshes every interval (default 1s)
+set -u
+INT=${1:-1}
+HWMON=$(echo /sys/devices/platform/coretemp.0/hwmon/hwmon*)
+declare -A PT PI
+while :; do
+  clear
+  while read -r c u n s i w ir si st rest; do
+    tot=$((u+n+s+i+w+ir+si+st)); idl=$((i+w))
+    if [[ -n ${PT[$c]:-} ]]; then
+      dt=$((tot - PT[$c])); di=$((idl - PI[$c]))
+      printf "%s %3d%%  %dC\n" "$c" $(( (dt-di)*100/dt )) \
+        $(( $(cat "$HWMON/temp$(( ${c#cpu} + 2 ))_input") / 1000 ))
+    fi
+    PT[$c]=$tot; PI[$c]=$idl
+  done < <(grep -E '^cpu[0-9]' /proc/stat)
+  sleep "$INT"
+done

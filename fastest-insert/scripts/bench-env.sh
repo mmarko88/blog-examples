@@ -3,7 +3,7 @@
 #
 #   bench-env.sh check             List running services grouped: KEEP / STOP / DESKTOP / REVIEW
 #   bench-env.sh smoke             Env-drift check: fixed SQL insert, >15% slower than baseline = warn
-#   bench-env.sh on                Enter benchmark mode: stop the STOP list + lock CPU to 3.0GHz
+#   bench-env.sh on                Enter benchmark mode: stop the STOP list + lock CPU to 3.5GHz
 #   bench-env.sh on --desktop      Also drop to runlevel 3 (isolate multi-user.target) — kills the
 #                                  whole GUI session; SSH stays up. Console gets text login.
 #   bench-env.sh off               Leave benchmark mode: graphical target + restart services +
@@ -98,7 +98,7 @@ cmd_quiet() {
     fi
   done
 
-  # CPU: record current settings, then lock all cores to 3.0 GHz (performance governor)
+  # CPU: record current settings, then lock all cores to 3.5 GHz (performance governor)
   local cf=/sys/devices/system/cpu/cpu0/cpufreq
   if [[ -d $cf ]]; then
     {
@@ -108,10 +108,10 @@ cmd_quiet() {
     } >> "$STATE"
     for c in /sys/devices/system/cpu/cpu*/cpufreq; do
       echo performance > "$c/scaling_governor"
-      echo 3000000 > "$c/scaling_max_freq"
-      echo 3000000 > "$c/scaling_min_freq"
+      echo 3500000 > "$c/scaling_max_freq"
+      echo 3500000 > "$c/scaling_min_freq"
     done
-    echo "CPU locked: performance governor, min=max=3.0GHz"
+    echo "CPU locked: performance governor, min=max=3.5GHz"
   fi
 
   # VM: pin swappiness low for benchmark determinism

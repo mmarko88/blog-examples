@@ -51,7 +51,7 @@ case "${1:-status}" in
     ;;
   run-env)   # internal: re-exec'd as root by `run` — PATH/JAVA_HOME carried in args
     EP=$2; EJ=$3; shift 4
-    systemd-run --scope --uid="${SUDO_USER:-$USER}" -p AllowedCPUs="$CORE" \
+    systemd-run --scope --slice=cpu-shield.slice --uid="${SUDO_USER:-$USER}" -p AllowedCPUs="$CORE" \
       -- env "PATH=$EP" "JAVA_HOME=$EJ" "$@"
     ;;
   *) echo "usage: cpu-shield [on [core]|off|status|run <cmd...>]"; exit 1 ;;
