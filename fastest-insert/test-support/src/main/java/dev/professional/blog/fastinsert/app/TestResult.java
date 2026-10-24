@@ -19,7 +19,7 @@ import java.util.Date;
 @Setter
 public class TestResult {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Integer id;
     @Column
     private String methodName;
