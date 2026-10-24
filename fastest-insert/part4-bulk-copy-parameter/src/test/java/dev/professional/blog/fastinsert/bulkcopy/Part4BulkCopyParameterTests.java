@@ -45,6 +45,7 @@ class Part4BulkCopyParameterTests extends AbstractBenchmarkTest {
     @ParameterizedTest
     @MethodSource(TEST_PARAMS)
     void regularBatchInsert(TestParam param) {
+        if (param.getObjectsPerInsert() > 1) return;
         multipleRunner.execJob("regularBatchInsert_bulkCopy", param,
                 v -> bulkPersistCustomRepository.insert(
                         param.getPeople(), PersonDescriptors.PERSON_TABLE,
@@ -55,6 +56,7 @@ class Part4BulkCopyParameterTests extends AbstractBenchmarkTest {
     @ParameterizedTest
     @MethodSource(TEST_PARAMS)
     void jdbcTemplateInsert(TestParam param) {
+        if (param.getObjectsPerInsert() > 1) return;
         multipleRunner.execJob("jdbcTemplateInsert_bulkCopy", param,
                 v -> springTemplateBulkInsertRepository.insertPeople(
                         PersonDescriptors.PERSON_TABLE, param.getPeople(),

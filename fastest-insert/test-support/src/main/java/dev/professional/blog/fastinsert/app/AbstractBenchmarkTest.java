@@ -54,7 +54,7 @@ public abstract class AbstractBenchmarkTest {
         int[] batchSizes = {10, 100, 1_000, 5_000};
 
         for (int opi : objectsPerInsert) {
-            List<Person> people = RandomPersonGenerator.generateRandomPersons(100_000);
+            List<Person> people = RandomPersonGenerator.generateRandomPersons(Integer.getInteger("bench.people.count", 100_000));
             for (int bs : batchSizes) {
                 params.add(new TestParam(people, bs, startDate, opi));
             }
