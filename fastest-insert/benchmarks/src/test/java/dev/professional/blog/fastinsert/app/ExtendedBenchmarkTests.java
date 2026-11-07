@@ -28,7 +28,7 @@ import java.util.stream.Stream;
 @SpringBootTest(properties = {
         "spring.config.location=classpath:application.properties",
         "spring.datasource.url=jdbc:sqlserver://localhost:1433;databaseName=testdb;encrypt=true;trustServerCertificate=true;useBulkCopyForBatchInsert=true",
-        "spring.jpa.properties.hibernate.jdbc.batch_size=10000"
+        "spring.jpa.properties.hibernate.jdbc.batch_size=${BENCH_JDBC_BATCH:10000}"
 })
 @SpringJUnitConfig
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)

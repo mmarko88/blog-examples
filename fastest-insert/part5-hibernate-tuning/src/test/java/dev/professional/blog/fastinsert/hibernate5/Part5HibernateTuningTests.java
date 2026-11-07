@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
  */
 @SpringBootTest(properties = {
         "spring.config.location=classpath:application.properties",
-        "spring.jpa.properties.hibernate.jdbc.batch_size=10000",
+        "spring.jpa.properties.hibernate.jdbc.batch_size=${BENCH_JDBC_BATCH:10000}",
         "spring.jpa.properties.hibernate.order_inserts=true",
         "spring.jpa.properties.hibernate.order_updates=true"
 })
