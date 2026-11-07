@@ -22,6 +22,7 @@ KEEP=(
   systemd-journald.service systemd-logind.service systemd-udevd.service
   systemd-oomd.service polkit.service cron.service rsyslog.service
   chrony.service thermald.service power-profiles-daemon.service
+  tailscaled.service
 )
 STOP=(
   accounts-daemon.service avahi-daemon.service avahi-daemon.socket
