@@ -44,11 +44,6 @@ public class StatelessSessionInsertRepository {
         try (StatelessSession statelessSession = sessionFactory.openStatelessSession()) {
             statelessSession.getTransaction().begin();
 
-            // Set batch size on the underlying JDBC connection
-            statelessSession.doWork(connection ->
-                    connection.createStatement().execute(
-                            "SET NOCOUNT ON"));
-
             for (int i = 0; i < people.size(); i++) {
                 statelessSession.insert(people.get(i));
 
