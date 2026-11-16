@@ -122,29 +122,31 @@ def main():
     # ---- Chart 1: Strategy Ranking (all strategies, best config) ----
     print('Chart 1: Strategy Ranking')
     ranking = [
-        ('Parallel Bulk API 4t', 330),
-        ('Multi-value 400 + 8t', 368),
-        ('Multi-value 400 + 4t', 426),
-        ('Parallel Bulk API 8t', 434),
-        ('Bulk API', 492),
-        ('Parallel JdbcTemplate 16t', 608),
-        ('Parallel JdbcTemplate 4t + bulkCopy', 731),
-        ('TVP (batch=5000)', 818),
-        ('BCP utility', 843),
-        ('Multi-value 200 (single)', 828),
-        ('StatelessSession + bulkCopy', 1075),
-        ('JdbcTemplate + bulkCopy', 1373),
-        ('Plain JDBC + bulkCopy', 1516),
-        ('Hibernate + bulkCopy', 2144),
-        ('Clustered + TABLOCK', 2185),
-        ('JDBC PreparedStatement', 2423),
-        ('StatelessSession', 2650),
-        ('JdbcTemplate', 2985),
-        ('SWITCH partition pattern', 3470),
-        ('Persistable saveAll', 3426),
-        ('Plain JDBC', 3905),
-        ('Hibernate persist', 4048),
-        ('Partitioned direct insert', 4652),
+        ('INSERT ... SELECT', 275),
+        ('INSERT ... SELECT ORDER BY', 273),
+        ('Parallel Bulk API 4t', 321),
+        ('Bulk API (batch=5000)', 412),
+        ('Multi-value 400 + 8t', 418),
+        ('BulkCopy batch=5000', 420),
+        ('Parallel Bulk API 8t', 426),
+        ('Multi-value 400 + 4t', 490),
+        ('Parallel Bulk 4t + bulkCopy', 493),
+        ('BulkCopy +TABLOCK', 564),
+        ('Parallel JdbcTemplate 16t', 612),
+        ('TVP (batch=5000)', 626),
+        ('Multi-value 400 (single)', 662),
+        ('Multi-value 200 (single)', 666),
+        ('StatelessSession + bulkCopy', 781),
+        ('JdbcTemplate + bulkCopy', 824),
+        ('Plain JDBC + bulkCopy', 901),
+        ('Hibernate + bulkCopy', 1052),
+        ('BULK INSERT (file)', 1469),
+        ('Clustered + TABLOCK', 1862),
+        ('Plain JDBC', 2018),
+        ('JdbcTemplate', 2031),
+        ('StatelessSession', 2046),
+        ('Hibernate persist', 2313),
+        ('Persistable saveAll', 2398),
     ]
     ranking.sort(key=lambda x: x[1])
     labels = [r[0] for r in ranking]
@@ -200,9 +202,9 @@ def main():
     idx_jdbc = []
     idx_hib = []
     for ix in idx_labels:
-        b = next((r['avg'] for r in data if r['method'] == f'bulkApi_{ix}idx' and r['batch'] == 1000), None)
-        j = next((r['avg'] for r in data if r['method'] == f'jdbcTemplate_{ix}idx' and r['batch'] == 1000), None)
-        h = next((r['avg'] for r in data if r['method'] == f'hibernate_{ix}idx' and r['batch'] == 1000), None)
+        b = next((r['avg'] for r in data if r['method'] == f'bulkApi_idx{ix}' and r['batch'] == 1000), None)
+        j = next((r['avg'] for r in data if r['method'] == f'jdbcTemplate_idx{ix}' and r['batch'] == 1000), None)
+        h = next((r['avg'] for r in data if r['method'] == f'hibernate_idx{ix}' and r['batch'] == 1000), None)
         idx_bulk.append(b)
         idx_jdbc.append(j)
         idx_hib.append(h)
@@ -232,14 +234,14 @@ def main():
     # ---- Chart 6: Row size + compression ----
     print('Chart 6: Row Size & Compression')
     row_data = [
-        ('Narrow (5 cols)', 3699, '#4CAF50'),
-        ('Wide (17 cols)', 6952, '#FF9800'),
-        ('LOB (NVARCHAR MAX)\n50k rows', 9834, '#F44336'),
-        ('No compression', 2417, '#2196F3'),
-        ('ROW compression', 2595, '#00BCD4'),
-        ('PAGE compression', 3229, '#9C27B0'),
-        ('Columnstore 1k', 8402, '#795548'),
-        ('Columnstore 5k', 4880, '#795548'),
+        ('Narrow (5 cols)', 2030, '#4CAF50'),
+        ('Wide (17 cols)', 3321, '#FF9800'),
+        ('LOB (NVARCHAR MAX)\n50k rows', 6280, '#F44336'),
+        ('No compression', 2033, '#2196F3'),
+        ('ROW compression', 2298, '#00BCD4'),
+        ('PAGE compression', 2546, '#9C27B0'),
+        ('Columnstore 1k', 4293, '#795548'),
+        ('Columnstore 5k', 4181, '#795548'),
     ]
     svg_bar_chart('Row Size, Compression & Columnstore (JDBC batch)',
                   [d[0] for d in row_data], [d[1] for d in row_data],
@@ -249,12 +251,12 @@ def main():
     # ---- Chart 7: Fill factor + partitioning ----
     print('Chart 7: Fill Factor & Partitioning')
     ff_data = [
-        ('Fill factor 50 (Bulk)', 1762, '#F44336'),
-        ('Fill factor 70 (Bulk)', 1199, '#FF9800'),
-        ('Fill factor 90 (Bulk)', 869, '#4CAF50'),
-        ('Fill factor 100 (Bulk)', 916, '#2196F3'),
-        ('Partitioned direct insert', 4652, '#9C27B0'),
-        ('SWITCH partition pattern', 3470, '#00BCD4'),
+        ('Fill factor 50 (Bulk)', 698, '#F44336'),
+        ('Fill factor 70 (Bulk)', 567, '#FF9800'),
+        ('Fill factor 90 (Bulk)', 572, '#4CAF50'),
+        ('Fill factor 100 (Bulk)', 556, '#2196F3'),
+        ('Partitioned direct insert', 2134, '#9C27B0'),
+        ('SWITCH partition pattern', 2209, '#00BCD4'),
     ]
     svg_bar_chart('Fill Factor & Partitioning (100k persons)',
                   [d[0] for d in ff_data], [d[1] for d in ff_data],
@@ -283,16 +285,16 @@ def main():
     # ---- Chart 9: Advanced Patterns ----
     print('Chart 9: Advanced Patterns')
     ap_data = [
-        ('RCSI ON (Bulk API)', 720, '#4CAF50'),
-        ('RCSI OFF (Bulk API)', 1211, '#2196F3'),
-        ('Async producer-consumer', 2676, '#00BCD4'),
-        ('RCSI OFF (JDBC)', 2817, '#9C27B0'),
-        ('Plain INSERT', 3177, '#607D8B'),
-        ('No trigger baseline', 3261, '#795548'),
-        ('MERGE upsert', 3514, '#FF9800'),
-        ('RCSI ON (JDBC)', 3565, '#9C27B0'),
-        ('Sync baseline', 3816, '#F44336'),
-        ('AFTER INSERT trigger', 7023, '#E91E63'),
+        ('RCSI ON (Bulk API)', 613, '#4CAF50'),
+        ('RCSI OFF (Bulk API)', 617, '#2196F3'),
+        ('Async producer-consumer', 2002, '#00BCD4'),
+        ('Plain INSERT', 2009, '#607D8B'),
+        ('RCSI OFF (JDBC)', 2024, '#9C27B0'),
+        ('No trigger baseline', 2088, '#795548'),
+        ('Sync baseline', 2101, '#F44336'),
+        ('RCSI ON (JDBC)', 2141, '#9C27B0'),
+        ('MERGE upsert', 2527, '#FF9800'),
+        ('AFTER INSERT trigger', 5175, '#E91E63'),
     ]
     svg_bar_chart('Advanced Patterns (100k persons)',
                   [d[0] for d in ap_data], [d[1] for d in ap_data],
@@ -302,13 +304,13 @@ def main():
     # ---- Chart 10: Storage Patterns ----
     print('Chart 10: Storage Patterns')
     sp_data = [
-        ('Temporal baseline', 3009, '#4CAF50'),
-        ('INT clustered (sequential)', 3015, '#2196F3'),
-        ('Change Tracking baseline', 3206, '#9C27B0'),
-        ('GUID sequential (NEWSEQ)', 3340, '#00BCD4'),
-        ('GUID random', 3588, '#FF9800'),
-        ('Temporal (SYSTEM_VERSIONED)', 3936, '#9C27B0'),
-        ('Change Tracking enabled', 5205, '#F44336'),
+        ('INT clustered (sequential)', 2027, '#2196F3'),
+        ('Change Tracking baseline', 2036, '#9C27B0'),
+        ('Temporal baseline', 2165, '#4CAF50'),
+        ('GUID sequential (NEWSEQ)', 2250, '#00BCD4'),
+        ('GUID random', 2630, '#FF9800'),
+        ('Temporal (SYSTEM_VERSIONED)', 3022, '#9C27B0'),
+        ('Change Tracking enabled', 3109, '#F44336'),
     ]
     svg_bar_chart('Storage Patterns: CT, Temporal, GUID Keys (100k persons)',
                   [d[0] for d in sp_data], [d[1] for d in sp_data],
@@ -318,16 +320,16 @@ def main():
     # ---- Chart 11: Index Varieties ----
     print('Chart 11: Index Varieties & Logging')
     iv_data = [
-        ('TF610 ON + TABLOCK', 2336, '#1565C0'),
-        ('TF610 OFF + TABLOCK', 2386, '#2196F3'),
-        ('No index baseline', 2782, '#4CAF50'),
-        ('Computed cols (1 persisted + 1 non)', 2707, '#00BCD4'),
-        ('Delayed Durability DISABLED', 3147, '#607D8B'),
-        ('Filtered index (17% match)', 3461, '#8BC34A'),
-        ('INCLUDE index', 3824, '#CDDC39'),
-        ('Composite 3-col index', 4071, '#FFC107'),
-        ('Delayed Durability FORCED', 4698, '#FF5722'),
-        ('Full non-clustered index', 4956, '#F44336'),
+        ('TF610 ON + TABLOCK', 1824, '#1565C0'),
+        ('TF610 OFF + TABLOCK', 1843, '#2196F3'),
+        ('No index baseline', 2007, '#4CAF50'),
+        ('Delayed Durability DISABLED', 2010, '#607D8B'),
+        ('Computed cols (1 persisted + 1 non)', 2073, '#00BCD4'),
+        ('Filtered index (17% match)', 2774, '#8BC34A'),
+        ('Full non-clustered index', 2885, '#F44336'),
+        ('INCLUDE index', 2965, '#CDDC39'),
+        ('Composite 3-col index', 2966, '#FFC107'),
+        ('Delayed Durability FORCED', 2996, '#FF5722'),
     ]
     svg_bar_chart('Indexes & Logging Patterns (100k persons)',
                   [d[0] for d in iv_data], [d[1] for d in iv_data],
@@ -337,16 +339,16 @@ def main():
     # ---- Chart 12: Column Types & Stats ----
     print('Chart 12: Column Types & Stats')
     ct_data = [
-        ('Baseline (stats ON)', 2966, '#4CAF50'),
-        ('Nonsparse mostly NULL', 3912, '#2196F3'),
-        ('Baseline (encrypted test)', 3948, '#607D8B'),
-        ('Sparse mostly NULL', 4005, '#00BCD4'),
-        ('AUTO_UPDATE_STATS OFF', 4474, '#FF9800'),
-        ('JSON column (NVARCHAR+ISJSON)', 4752, '#9C27B0'),
-        ('Nonsparse mostly filled', 5053, '#2196F3'),
-        ('Sparse mostly filled', 5772, '#00BCD4'),
-        ('XML column', 10916, '#F44336'),
-        ('ENCRYPTBYPASSPHRASE (3 cols)', 15952, '#E91E63'),
+        ('Baseline (stats ON)', 2038, '#4CAF50'),
+        ('Baseline (encrypted test)', 2054, '#607D8B'),
+        ('AUTO_UPDATE_STATS OFF', 2053, '#FF9800'),
+        ('Nonsparse mostly NULL', 2090, '#2196F3'),
+        ('Sparse mostly NULL', 2234, '#00BCD4'),
+        ('Nonsparse mostly filled', 3518, '#2196F3'),
+        ('JSON column (NVARCHAR+ISJSON)', 3878, '#9C27B0'),
+        ('Sparse mostly filled', 3912, '#00BCD4'),
+        ('XML column', 6013, '#F44336'),
+        ('ENCRYPTBYPASSPHRASE (3 cols)', 12076, '#E91E63'),
     ]
     svg_bar_chart('Column Types, Stats & Encryption (100k persons)',
                   [d[0] for d in ct_data], [d[1] for d in ct_data],
@@ -356,13 +358,13 @@ def main():
     # ---- Chart 13: In-Memory, BULK INSERT, procs ----
     print('Chart 13: In-Memory & BULK')
     im_data = [
-        ('BULK INSERT (server-side file)', 637, '#4CAF50'),
-        ('In-Memory interpreted', 2726, '#2196F3'),
-        ('Ad-hoc INSERT (baseline)', 2734, '#607D8B'),
-        ('Check constraints disabled', 2909, '#00BCD4'),
-        ('Check constraints enabled', 2954, '#00BCD4'),
-        ('Stored procedure (interpreted)', 4807, '#FF9800'),
-        ('In-Memory natively compiled proc (no batch)', 58542, '#F44336'),
+        ('BULK INSERT (server-side file)', 1469, '#4CAF50'),
+        ('In-Memory interpreted', 1837, '#2196F3'),
+        ('Check constraints disabled', 2007, '#00BCD4'),
+        ('Ad-hoc INSERT (baseline)', 2038, '#607D8B'),
+        ('Check constraints enabled', 2277, '#00BCD4'),
+        ('Stored procedure (interpreted)', 3957, '#FF9800'),
+        ('In-Memory natively compiled proc (no batch)', 667872, '#F44336'),
     ]
     svg_bar_chart('In-Memory OLTP, BULK INSERT & Procs (100k persons)',
                   [d[0] for d in im_data], [d[1] for d in im_data],
@@ -372,14 +374,14 @@ def main():
     # ---- Chart 14: Identity / FK / Retry ----
     print('Chart 14: Identity, FK, Retry')
     id_data = [
-        ('No FK constraint', 2957, '#4CAF50'),
-        ('App-generated ID', 3085, '#2196F3'),
-        ('FK disabled (NOCHECK)', 3108, '#FFC107'),
-        ('IDENTITY column', 3459, '#9C27B0'),
-        ('FK trusted (CHECK)', 3592, '#FF9800'),
-        ('SET IDENTITY_INSERT ON (explicit)', 3857, '#607D8B'),
-        ('SEQUENCE default', 4052, '#00BCD4'),
-        ('IDENTITY + RETURN_GENERATED_KEYS', 4142, '#F44336'),
+        ('App-generated ID', 2029, '#2196F3'),
+        ('No FK constraint', 2065, '#4CAF50'),
+        ('FK disabled (NOCHECK)', 2186, '#FFC107'),
+        ('IDENTITY column', 2528, '#9C27B0'),
+        ('SET IDENTITY_INSERT ON (explicit)', 2598, '#607D8B'),
+        ('FK trusted (CHECK)', 2600, '#FF9800'),
+        ('IDENTITY + RETURN_GENERATED_KEYS', 2851, '#F44336'),
+        ('SEQUENCE default', 3544, '#00BCD4'),
     ]
     svg_bar_chart('ID Generation & Foreign Keys (100k persons)',
                   [d[0] for d in id_data], [d[1] for d in id_data],
@@ -389,17 +391,18 @@ def main():
     # ---- Chart 15: Final patterns ----
     print('Chart 15: Plans, Latency, SELECT')
     fp_data = [
-        ('INSERT ... SELECT (server-side)', 319, '#4CAF50'),
-        ('INSERT ... SELECT ORDER BY', 447, '#8BC34A'),
-        ('BulkCopy batch=5000', 535, '#2196F3'),
-        ('BulkCopy +checkConstraints', 619, '#00BCD4'),
-        ('BulkCopy +TABLOCK', 662, '#9C27B0'),
-        ('BulkCopy default (batch=1000)', 765, '#607D8B'),
-        ('Latency 0ms baseline', 2759, '#FFC107'),
-        ('Latency +1ms/batch', 2948, '#FF9800'),
-        ('Latency +5ms/batch', 4370, '#FF5722'),
-        ('Plan cached (default)', 2772, '#795548'),
-        ('OPTION(RECOMPILE) !!', 145097, '#F44336'),
+        ('INSERT ... SELECT ORDER BY', 273, '#8BC34A'),
+        ('INSERT ... SELECT (server-side)', 275, '#4CAF50'),
+        ('INSERT…SELECT (tiny grant, SPILL)', 320, '#FFC107'),
+        ('BulkCopy batch=5000', 420, '#2196F3'),
+        ('BulkCopy +TABLOCK', 564, '#9C27B0'),
+        ('BulkCopy +checkConstraints', 570, '#00BCD4'),
+        ('BulkCopy default (batch=1000)', 619, '#607D8B'),
+        ('Latency 0ms baseline', 2030, '#FFC107'),
+        ('Plan cached (default)', 2059, '#795548'),
+        ('Latency +1ms/batch', 2148, '#FF9800'),
+        ('Latency +5ms/batch', 2536, '#FF5722'),
+        ('OPTION(RECOMPILE) !!', 93031, '#F44336'),
     ]
     svg_bar_chart('Query Plans, Latency & INSERT…SELECT (100k persons)',
                   [d[0] for d in fp_data], [d[1] for d in fp_data],
@@ -409,13 +412,13 @@ def main():
     # ---- Chart 16: SNAPSHOT + SWITCH with indexes ----
     print('Chart 16: SNAPSHOT & SWITCH with indexes')
     sw_data = [
-        ('SWITCH, 0 indexes', 2952, '#4CAF50'),
-        ('RC + 4 readers (readers blocked)', 2964, '#8BC34A'),
-        ('SNAPSHOT single writer', 2997, '#2196F3'),
-        ('SWITCH, 1 index', 4205, '#FFC107'),
-        ('SNAPSHOT + 2 readers (430 reads)', 4638, '#9C27B0'),
-        ('SNAPSHOT + 4 readers (1100 reads)', 6259, '#F44336'),
-        ('SWITCH, 3 indexes', 6369, '#FF5722'),
+        ('SNAPSHOT single writer', 2115, '#2196F3'),
+        ('RC + 4 readers (readers blocked)', 2127, '#8BC34A'),
+        ('SWITCH, 0 indexes', 2163, '#4CAF50'),
+        ('SNAPSHOT + 4 readers (560 reads)', 2313, '#F44336'),
+        ('SWITCH, 1 index', 3106, '#FFC107'),
+        ('SNAPSHOT + 2 readers (310 reads)', 4309, '#9C27B0'),
+        ('SWITCH, 3 indexes', 4567, '#FF5722'),
     ]
     svg_bar_chart('SNAPSHOT Isolation & Partition SWITCH with Indexes',
                   [d[0] for d in sw_data], [d[1] for d in sw_data],
@@ -425,12 +428,12 @@ def main():
     # ---- Chart 17: XML/JSON indexes & tempdb spill ----
     print('Chart 17: XML/JSON indexes + spill')
     xj_data = [
-        ('INSERT…SELECT (normal grant)', 326, '#4CAF50'),
-        ('INSERT…SELECT (tiny grant, SPILL)', 657, '#FFC107'),
-        ('JSON no index', 5774, '#2196F3'),
-        ('JSON + computed-col index', 8493, '#9C27B0'),
-        ('XML no index', 8339, '#FF9800'),
-        ('XML + primary XML index', 38265, '#F44336'),
+        ('INSERT…SELECT (normal grant)', 273, '#4CAF50'),
+        ('INSERT…SELECT (tiny grant, SPILL)', 320, '#FFC107'),
+        ('JSON no index', 3357, '#2196F3'),
+        ('JSON + computed-col index', 4952, '#9C27B0'),
+        ('XML no index', 5893, '#FF9800'),
+        ('XML + primary XML index', 25946, '#F44336'),
     ]
     svg_bar_chart('XML/JSON Indexes & tempdb Spill (100k persons)',
                   [d[0] for d in xj_data], [d[1] for d in xj_data],
